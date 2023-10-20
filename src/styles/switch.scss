@@ -1,0 +1,61 @@
+.switch {
+    width: 76vw;
+    height: 9vw;
+  
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    // background-image: url("../assets/event-gifting/daily-overall-bg.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    // border: 1px solid green;
+  }
+  
+  .slider-button {
+    width: 50%;
+    height: 9vw;
+  
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.2s;
+    // background-image: url("../assets/event-gifting/daily-btn.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: none;
+    // border: 1px solid green;
+  }
+  
+  .slider-button.on {
+    transform: translateX(38vw);
+  }
+  
+  .slider-handle {
+    width: 50%;
+    height: 12vw;
+    border-radius: 50%;
+    /* background-color: #ccc; */
+    position: absolute;
+    top: 4px;
+    /* left: 4px; */
+    transition: transform 0.2s;
+    // border: 1px solid red;
+  }
+  
+  .slider-button.on .slider-handle {
+    transform: translateX(4px);
+    background-color: #fff;
+  }
+  
+  .slider-button.off .slider-handle {
+    transform: translateX(0);
+  }
+  .left {
+    left: 0;
+  }
+  .right {
+    right: 0;
+  }
+  

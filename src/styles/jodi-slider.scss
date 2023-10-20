@@ -1,0 +1,96 @@
+.jodi-slider {
+    width: 90%;
+    // height: 34vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 11vw;
+    .left-arrow {
+      width: 4vw;
+    }
+    .right-arrow {
+      width: 4vw;
+    }
+  
+    .slider-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    //   background-image: url("../images/popups/reward-display-stage.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border: none;
+      background-color: transparent;
+    //   position: relative;
+      width: 52vw;
+      height: 43vw;
+    //   top: -10vw;
+      pointer-events: none;
+  
+      .images {
+        width: 36vw;
+        height: 24vw;
+  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        img {
+          width: 21vw;
+          position: relative;
+          
+        }
+      }
+      .desc {
+        position: absolute;
+        min-width: 47vw;
+        min-height: 7vw;
+        width: 47vw;
+        // height: 7vw;
+       
+        bottom: -7vw;
+        left: 22vw;
+        border-radius: 4vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2vw;
+        // background-image: url('../images/event-gifting/reward-info-bg.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;
+   
+  
+        span{
+          font-size: 4vw;
+
+          font-family: 'ROG';
+          position: relative;
+          bottom: 1vw;
+          color: black;
+        }
+      }
+      .indicators {
+        display: flex;
+        gap: 1vw;
+        // margin-top: 4vw;
+        position: relative;
+        // top: 0vw;
+        .slider-dot {
+          width: 2vw;
+          height: 2vw;
+          border-radius: 100%;
+          border: 0.2vw solid yellow;
+          background-color: brown;
+        }
+        .active-dot {
+          background-color: gold !important;
+        }
+      }
+    }
+  }
+  

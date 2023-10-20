@@ -1,0 +1,117 @@
+.topper {
+    width: 30vw;
+    height: 40vw;
+
+  
+    .topper-images {
+      position: relative;
+      left: 5vw;
+      top: 0vw;
+      .rank {
+        left: -5vw;
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+      }
+      .rank2 {
+        top: 0vw;
+        width: 75%;
+        left: -2vw;
+        position: absolute;
+        z-index: 2;
+      }
+      .rank3 {
+        top: 0vw;
+        width: 75%;
+        left: -2vw;
+        position: absolute;
+        z-index: 2;
+      }
+  
+      .user {
+        top: 3vw;
+        left: 1vw;
+        width: 56%;
+        position: absolute;
+        border-radius: 100%;
+        z-index: 1;
+      }
+    }
+  
+    .topper-details {
+      // height: 20vw;
+      width: 85%;
+      // height: 17vw;
+      left: 2vw;
+    
+      position: relative;
+      top: 19vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Helvetica";
+      gap: 1.5vw;
+      padding: 1vw;
+  
+      .name {
+        font-size: 2vw;
+        // height: 3vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 19vw;
+        text-align: center;
+        color: yellow;
+        position: relative;
+        top: 3vw;
+      }
+      .levelImg {
+        width: 10vw;
+        display: block;
+        margin: 0 auto;
+        position: relative;
+      top: 2vw;
+      }
+      .estimatedBeans {
+        background-color: #213270;
+        width: 80%;
+        display: flex;
+        border-radius: 3vw;
+        justify-content: center;
+        color: white;
+        align-items: center;
+        font-size: 1.5vw;
+        // height: 5vw;
+        flex-direction: column;
+        position: relative;
+        top: 1vw;
+        padding-top: 0.5vw;
+        img {
+          width: 2.5vw;
+        }
+        span {
+        }
+      }
+      .beans-spent {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        color: white;
+        align-items: center;
+        font-size: 2.5vw;
+        background-image: url('../assets/images/top-3-beans-bg.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat; 
+        padding: 0.5vw;
+        position: relative;
+        top: 1vw;
+        img {
+          width: 3vw;
+        }
+        span {
+        }
+      }
+    }
+  }
+  

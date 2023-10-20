@@ -1,0 +1,204 @@
+.event-gifting {
+  .event-gifts {
+    background-image: url("../assets//images/event-gift-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    height: 50vw;
+    width: 95%;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 7vw;
+
+    .title {
+      width: 68vw;
+      position: absolute;
+      left: 15vw;
+      top: -5vw;
+    }
+
+    .gifts-row {
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+      top: 7vw;
+    }
+    .gift {
+      display: flex;
+      flex-direction: column;
+      .gift-details {
+        background-image: url("../assets//images/gift-base.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 25vw;
+        height: 32vw;
+        position: relative;
+
+        .name {
+          font-size: 3vw;
+          position: absolute;
+          left: 8vw;
+          top: 4vw;
+        }
+        img {
+          width: 15vw;
+          position: absolute;
+          top: 10vw;
+          left: 5vw;
+        }
+      }
+      .price {
+        background-color: #5f1b5e;
+        height: 6vw;
+        border-radius: 3vw;
+        width: 22vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5vw;
+        position: relative;
+        left: 1vw;
+        span {
+          font-size: 3vw;
+          color: white;
+        }
+        img {
+          width: 4vw;
+        }
+      }
+    }
+  }
+
+  .beans-pot {
+    // width: 80%;
+    height: 42vw;
+    background-image: url("../assets//images/beans-pot-with-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+
+    .text {
+      position: absolute;
+      font-size: 3vw;
+      top: 12vw;
+      width: 43vw;
+      left: 37vw;
+      color: white;
+    }
+    .pot-value {
+      height: 6vw;
+      border-radius: 2vw;
+      background-color: #5b1a5e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      bottom: 8vw;
+      left: 42vw;
+      color: white;
+      padding: 2vw;
+      span {
+        font-size: 3vw;
+        color: yellow;
+      }
+      img {
+        width: 4vw;
+      }
+    }
+  }
+
+  .rewards {
+    .rewards-tabs {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  .gifting-leaderboard-sec {
+    .leaderboard-comp {
+      width: 100%;
+      height: 175vw;
+      background-image: url("../assets/images/leaderboard-bg.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      .toppers-section {
+        height: 50vw;
+        // border: 1px solid red;
+        position: relative;
+        display: flex;
+        position: relative;
+
+        .pos-1{
+          position: absolute;
+          left: 32vw;
+        }
+        
+        .pos-2{
+          position: absolute;
+         top: 13vw;
+        }
+        
+        .pos-3{
+          position: absolute;
+          right: 5vw;
+          top: 13vw;
+        }
+      }
+      .restWinners-section {
+        padding: 2vw;
+      height: 115vw;
+      // border: 2px solid yellow;
+      overflow-y: auto;
+      width: 95%;
+      margin: 0 auto;
+  
+      }
+      .restWinners-section::-webkit-scrollbar {
+        width: 1vw;
+        background-color: gray;
+      }
+
+      /* Track */
+      .restWinners-section::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 1vw;
+      }
+
+      /* Handle */
+      .restWinners-section::-webkit-scrollbar-thumb {
+        background: white;
+        border-radius: 2vw;
+      }
+
+      /* Handle on hover */
+      .restWinners-section::-webkit-scrollbar-thumb:hover {
+        background: #b30000;
+      }
+      .see-more{
+        width: 19vw;
+        height: 7vh;
+        background-image: url('../assets/images/see-more.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        border: none;
+        background-color: transparent;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .see-less{
+        width: 19vw;
+        height: 7vh;
+        background-image: url('../assets/images/see-less.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        border: none;
+        background-color: transparent;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+  }
+}

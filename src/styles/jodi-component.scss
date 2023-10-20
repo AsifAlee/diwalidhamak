@@ -1,0 +1,78 @@
+.jodi-component {
+ position: relative;
+  .jodi-images {
+    // position: absolute;
+    width: 57vw;
+     position: relative;
+    .frame {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .user-img{
+        width: 15vw;
+        position: absolute;
+        right: lef;
+        left: 12vw;
+        top: 14vw;
+        z-index: 0;
+    }
+    .talent-img{
+        width: 15vw;
+        position: absolute;
+        right: lef;
+        left: 30vw;
+        top: 14vw;
+        z-index: 0;
+    }
+  }
+  .names {
+    color: white;
+    display: flex;
+    position: relative;
+    left: 5vw;
+    top: -6vw;
+    color: white;
+    font-size: 2.3vw;
+    .uname {
+      width: 25vw;
+      height: 8vw;
+      background-image: url("../assets/images/diwali-dhamka//user-name-bg.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      
+
+      .beans-div {
+        display: flex;
+
+        img {
+          width: 3vw;
+        }
+      }
+    }
+    .tname {
+    //     position: absolute;
+      width: 25vw;
+      height: 8vw;
+      background-image: url("../assets/images/diwali-dhamka//user-name-bg.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    
+      .beans-div {
+        display: flex;
+
+        img {
+          width: 3vw;
+        }
+      }
+    }
+  }
+}
