@@ -12,19 +12,6 @@ code {
     monospace;
 }
 
-@font-face {
-  font-family: "HiJack";
-  src: local("HiJack"), url("./assets//fonts/HiJack.ttf") format("truetype");
-}
-@font-face {
-  font-family: "ROG";
-  src: local("ROG"), url("./assets/fonts/ROG.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Helvetica";
-  src: local("Helvetica"),
-    url("./assets/fonts/Helvetica-Bold-Font.ttf") format("truetype");
-}
 
 
 .tab-button{
@@ -167,6 +154,7 @@ button{
   color: white;
   position: relative;
   top: 3vw;
+  font-size: 2.7vw;
 }
 .footer{
   width: 100%;
@@ -183,5 +171,13 @@ button{
 }
 .yellow{
   color: yellow;
+}
+
+.highlight {
+  background-color: yellow;
+  color: black;
+  padding: 0.2vw;
+  margin-right: 1vw;
+  margin-left: 1vw;
 }
 

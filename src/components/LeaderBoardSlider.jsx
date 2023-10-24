@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/leaderboard-slider.scss";
 import SliderItem from "./LeaderBoardSliderItem";
+import HistorySliderItem from "./HistorySliderItem";
 
-const LeaderBoardSlider = ({ rewards }) => {
+const LeaderBoardSlider = ({ rewards, isHistory }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
   const slideInterval = 2000;
@@ -45,7 +46,11 @@ const LeaderBoardSlider = ({ rewards }) => {
       >
         {rewards?.length &&
           rewards[currentIndex]?.map((item, index) => {
-            return <SliderItem item={item} key={index} />;
+            return isHistory ? (
+              <HistorySliderItem item={item} key={index} />
+            ) : (
+              <SliderItem item={item} key={index} />
+            );
           })}
       </div>
     </div>

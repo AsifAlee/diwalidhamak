@@ -3,12 +3,17 @@ import { testLeaderData } from "../testData";
 import Topper from "./Topper";
 import LeaderBoardItem from "./LeaderBoardItem";
 
-const LeaderboardComponent = ({ data }) => {
+const LeaderboardComponent = ({
+  data,
+  isTalent,
+  showEst,
+  calculateEstRewards,
+}) => {
   const [seeMore, setSeeMore] = useState(true);
   const toggleSeeMore = () => {
     setSeeMore((prevState) => !prevState);
   };
-  const calculateEstRewards = () => {};
+
   return (
     <div className="leaderboard-comp">
       <div className="toppers-section">
@@ -17,8 +22,9 @@ const LeaderboardComponent = ({ data }) => {
             <Topper
               user={data[0]}
               index={1}
-              showEst={true}
+              showEst={showEst}
               calculateEstRewards={calculateEstRewards}
+              isTalent={isTalent}
             />
           </div>
         )}
@@ -27,8 +33,9 @@ const LeaderboardComponent = ({ data }) => {
             <Topper
               user={data[1]}
               index={2}
-              showEst={true}
+              showEst={showEst}
               calculateEstRewards={calculateEstRewards}
+              isTalent={isTalent}
             />
           </div>
         )}
@@ -37,15 +44,22 @@ const LeaderboardComponent = ({ data }) => {
             <Topper
               user={data[2]}
               index={3}
-              showEst={true}
+              showEst={showEst}
               calculateEstRewards={calculateEstRewards}
+              isTalent={isTalent}
             />
           </div>
         )}
       </div>
       <div className="restWinners-section">
         {data?.slice(3, seeMore ? 10 : 20).map((user, index) => (
-          <LeaderBoardItem user={user} index={index + 4} />
+          <LeaderBoardItem
+            user={user}
+            index={index + 4}
+            isTalent={isTalent}
+            showEst={showEst && index <= 1}
+            calculateEstRewards={calculateEstRewards}
+          />
         ))}
       </div>
       {data.length > 10 && (

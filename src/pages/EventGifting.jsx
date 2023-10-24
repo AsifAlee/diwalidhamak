@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import giftsTitle from "../assets/images/event-gifting-tag.png";
 import "../styles/gifting.scss";
 import Gift from "../components/Gift";
@@ -8,7 +8,9 @@ import UseRewards from "./UseRewards";
 import TalentRewards from "./TalentRewards";
 import UserLeaderBoard from "./UserLeaderBoard";
 import TalentLeaderBoard from "./TalentLeaderBoard";
+import { AppContext } from "../AppContext";
 const EventGifting = () => {
+  const { info } = useContext(AppContext);
   const [rewardsTabs, setRewardsTabs] = useState({
     user: true,
     talent: false,
@@ -61,7 +63,7 @@ const EventGifting = () => {
           Overall Leaderboard.
         </p>
         <div className="pot-value">
-          <span>000,000,00</span>
+          <span>{info.overallBeansPot}</span>
           <img src={bean} />
         </div>
       </div>

@@ -37,7 +37,7 @@ const TalentLeaderBoard = () => {
           btnImg={boardTabs.hourly ? "hourly-sel" : "hourly-un"}
           arrowImage={false}
           showArrowImg={false}
-          width="20vw"
+          width="22vw"
           height="7vw"
         />
         <TabButton
@@ -46,7 +46,7 @@ const TalentLeaderBoard = () => {
           btnImg={boardTabs.overall ? "overall-sel" : "overall-un"}
           arrowImage={false}
           showArrowImg={false}
-          width="20vw"
+          width="22vw"
           height="7vw"
         />
       </div>
@@ -66,6 +66,7 @@ const TalentLeaderBoard = () => {
             ? userHourlyNow
             : userHourlyPrev
         }
+        isTalent={true}
       />
     </>
   );

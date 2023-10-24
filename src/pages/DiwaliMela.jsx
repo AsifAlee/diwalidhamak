@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/diwalimela.scss";
 import albumTitle from "../assets/images/diwali-dhamka/Best-partnership-album-text.png";
 import parternshipTitle from "../assets/images/diwali-dhamka/Festival-favourite-partnership-text.png";
@@ -14,8 +14,12 @@ import prevBtn from "../assets/images/prev-btn.png";
 import switchBg from "../assets/images/current-previous-btn-bg.png";
 import SwitchButton from "../components/SwitchButton";
 import JodiLeaderboardItem from "../components/JodiLeaderboardItem";
-
+import { AppContext } from "../AppContext";
+import { getRewardsImage } from "../functions";
+import moment from "moment/moment";
 const DiwaliMela = () => {
+  const { info } = useContext(AppContext);
+
   const [rewardsTabs, setRewardsTabs] = useState({
     user: true,
     talent: false,
@@ -63,6 +67,65 @@ const DiwaliMela = () => {
   function handleSliderToggle(isOn) {
     setIsSliderOn(isOn);
   }
+
+  let d = null;
+  let h = null;
+  let m = null;
+  let s = null;
+
+  const [days, setDays] = useState(null);
+  const [hrs, setHours] = useState(null);
+  const [mins, setMins] = useState(null);
+  const [secs, setSecs] = useState(null);
+
+  function timeSet() {
+    const now = new Date();
+
+    const year = now.getUTCFullYear();
+    const month = now.getUTCMonth() + 1;
+    const day = now.getUTCDate();
+    const hours = now.getUTCHours();
+    const minutes = now.getUTCMinutes();
+    const seconds = now.getUTCSeconds();
+    const milliseconds = now.getUTCMilliseconds();
+
+    console.log(
+      "time is",
+      `${year}-${month}-${day} 
+             ${hours}:${minutes}:${seconds}.${milliseconds}`
+    );
+    var timertwelevehOur = " 11:59:59";
+    var timertwentyFourhOur = " 23:59:59";
+
+    var timerData = hours <= 12 ? timertwelevehOur : timertwentyFourhOur;
+
+    let endTime = year + "-" + month + "-" + day + timerData;
+    console.log("end time:", endTime);
+    let startTime = moment().utc().format("YYYY-MM-DD HH:mm:ss");
+    let t = moment(endTime).diff(startTime) / 1000; //计算本地时间和utc时间差
+
+    let timeInterval = setInterval(() => {
+      t--;
+      d = Math.floor(t / (24 * 3600));
+      h = Math.floor((t - 24 * 3600 * d) / 3600);
+      m = Math.floor((t - 24 * 3600 * d - h * 3600) / 60);
+      s = Math.floor(t - 24 * 3600 * d - h * 3600 - m * 60);
+      setDays(d);
+      setHours(h);
+      setMins(m);
+      setSecs(s);
+      if (d < 0) {
+        clearInterval(timeInterval);
+        return;
+      }
+      console.log("d is:", d);
+      console.log("h is:", h);
+      console.log("m is:", m);
+      console.log("s is:", s);
+    }, 1000);
+  }
+  timeSet();
+
   return (
     <div className="diwali-mela">
       <div className="game-section"></div>
@@ -70,7 +133,7 @@ const DiwaliMela = () => {
         <img className="title" src={albumTitle} />
         <JodiSlider data={jodiData} showIndicators={true} />
       </div>
-      <div className="d-flex j-sa">
+      <div className="d-flex j-sa" style={{ marginTop: "3vw" }}>
         <TabButton
           handleClick={toggleRewardsTabs}
           name="user"
@@ -86,13 +149,27 @@ const DiwaliMela = () => {
           showArrowImg={false}
         />
       </div>
-      <div className="beans-pot">
-        <p className="text">Beans Pot will be rewarded to TOP 5 Users.</p>
-        <div className="pot-value">
-          <img src={bean} />
-          <span>000,000,00</span>
-        </div>
-      </div>
+      <>
+        {rewardsTabs.user ? (
+          <div className="beans-pot">
+            <p className="text">Beans Pot will be rewarded to TOP 5 Users.</p>
+            <div className="pot-value">
+              <img src={bean} />
+              <span>{info?.partnershipBeansPot?.current}</span>
+            </div>
+          </div>
+        ) : (
+          <div className="rew-container">
+            <div className="reward-item">
+              <div className="image-div">
+                <img src={getRewardsImage("Bunny profile Frame")} />
+              </div>
+              <p className="center">Bunny profile Frame x3 days</p>
+            </div>
+          </div>
+        )}
+      </>
+
       <div className="favrt-jodi-partnership">
         <img src={parternshipTitle} className="title" />
         <div className="hourGlass">
@@ -100,11 +177,11 @@ const DiwaliMela = () => {
             className="d-flex p-rel al-center"
             style={{ left: "5vw", top: "8vw" }}
           >
-            <TimeUnit unit="Hr" />
+            <TimeUnit unit="Hr" value={hrs} />
             <span className="timer-colon">:</span>
-            <TimeUnit unit="Min" />
+            <TimeUnit unit="Min" value={mins} />
             <span className="timer-colon">:</span>
-            <TimeUnit unit="Sec" />
+            <TimeUnit unit="Sec" value={secs} />
           </div>
         </div>
       </div>

@@ -35,6 +35,36 @@
         width: 8vw;
       }
     }
+    .history-slider-item {
+      width: 17vw;
+      height: 15vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .img-with-bg {
+        width: 12vw;
+        height: 80%;
+        
+        // background-image: url("../images/game-area/leaderboard-reward-bg.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        border: none;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 12vw;
+        }
+      }
+      span{
+          width: 90%;
+          height: 20%;
+          font-size: 1.7vw;
+          text-align: center;
+      }
+    }
   
  
   }

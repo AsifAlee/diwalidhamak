@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TabButton from "../components/TabButtons";
 import SwitchButton from "../components/SwitchButton";
 import switchBg from "../assets/images/current-previous-btn-bg.png";
@@ -6,8 +6,11 @@ import currentBtn from "../assets/images/Current-btn.png";
 import prevButton from "../assets/images/prev-btn.png";
 import LeaderboardComponent from "../components/LeaderboardComponent";
 import { userHourlyNow, userHourlyPrev, userOverallData } from "../testData";
+import { AppContext } from "../AppContext";
+import { userOverallPot } from "../beansPot";
 
 const UserLeaderBoard = () => {
+  const { info } = useContext(AppContext);
   const [boardTabs, setBoardTabs] = useState({
     hourly: true,
     overall: false,
@@ -29,6 +32,13 @@ const UserLeaderBoard = () => {
   function handleSliderToggle(isOn) {
     setIsSliderOn(isOn);
   }
+
+  const calculateEstRewards = (index) => {
+    const percent = userOverallPot.find((item) => item.rank === index).percent;
+    const result = Math.floor((percent / 100) * info.overallBeansPot);
+
+    return result;
+  };
   return (
     <>
       <div className="d-flex j-sa">
@@ -38,7 +48,7 @@ const UserLeaderBoard = () => {
           btnImg={boardTabs.hourly ? "hourly-sel" : "hourly-un"}
           arrowImage={false}
           showArrowImg={false}
-          width="20vw"
+          width="22vw"
           height="7vw"
         />
         <TabButton
@@ -47,7 +57,7 @@ const UserLeaderBoard = () => {
           btnImg={boardTabs.overall ? "overall-sel" : "overall-un"}
           arrowImage={false}
           showArrowImg={false}
-          width="20vw"
+          width="22vw"
           height="7vw"
         />
       </div>
@@ -67,6 +77,9 @@ const UserLeaderBoard = () => {
             ? userHourlyNow
             : userHourlyPrev
         }
+        isTalent={false}
+        showEst={boardTabs.overall}
+        calculateEstRewards={calculateEstRewards}
       />
     </>
   );

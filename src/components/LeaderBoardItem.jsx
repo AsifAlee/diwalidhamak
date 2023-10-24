@@ -12,7 +12,7 @@ const LeaderBoardItem = ({
   user,
   isTalent,
   showEst,
-  calculateEstRewards,
+  calculateEstRewards = () => {},
   isPrev,
 }) => {
   return (

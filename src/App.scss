@@ -3,28 +3,35 @@
   margin: 0;
   padding: 0;
 }
-button{
+button {
   background: transparent;
   border: none;
   outline: none;
   box-shadow: none !important;
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-  }
-
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
 .App {
-  background-image: url('./assets/images/bg.jpg');
+  background-image: url("./assets/images/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  .main-tabs{
+  .main-tabs {
     display: flex;
     justify-content: space-around;
 
-    .sample-img{
-      background-image: url('./logo.svg');
+    .sample-img {
+      background-image: url("./logo.svg");
     }
-
   }
-  
-}
 
+  .guide-btn {
+    background-image: url("./assets/images/guide-btn.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 20vw;
+    height: 10vw;
+    position: absolute;
+    right: 0;
+    top: 64vw;
+  }
+}

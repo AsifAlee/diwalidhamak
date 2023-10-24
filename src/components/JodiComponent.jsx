@@ -4,7 +4,6 @@ import beans from "../assets/images/bean-icon.png";
 import unknown from "../assets/images/unknown-user.png";
 import "../styles/jodi-component.scss";
 const JodiComponent = ({ currentData }) => {
-  console.log("current data:", currentData);
   return (
     <div className="jodi-component">
       <div className="jodi-images">

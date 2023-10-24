@@ -17,6 +17,17 @@
       position: absolute;
       right: 1vw;
     }
+
+    .purchase-btn{
+      width: 25vw;
+      height: 9vw;
+      background-image: url("../assets/images/popups/purchase-btn.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      bottom: 0vw;
+      left: 31vw;
+    }
   }
   .house-info {
     width: 90%;

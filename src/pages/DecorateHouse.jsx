@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import title from "../assets/images/decorate-house/heading-text.png";
 import leaderboardTag from "../assets/images/decorate-house/rewards-winners-text.png";
 import "../styles/decorate-house.scss";
 import GameLeaderboartItem from "../components/GameLeaderboartItem";
+import RewardsHistoryPopup from "../popups/RewardsHistoryPopup";
+import AreUSure from "../popups/AreUSure";
+import Purchased from "../popups/Purchased";
 const DecorateHouse = () => {
+  const [showRewardsHist, setShowRewardsHist] = useState(false);
+  const [showSurePopUp, setShowSurePopup] = useState(false);
+  const [purchasePopup, setPurchasePopup] = useState(false);
+  const toggleRewardsHist = () => {
+    setShowRewardsHist((prevState) => !prevState);
+  };
+  const toggleRSurePopuo = () => {
+    setShowSurePopup((prevState) => !prevState);
+  };
+  const togglePurchasePopup = () => {
+    setShowSurePopup(false);
+    setPurchasePopup((prevState) => !prevState);
+  };
   return (
     <div className="decorate-house">
       <div className="decorate-house-game">
-        <button className="reward-hist-btn" />
+        <button className="reward-hist-btn" onClick={toggleRewardsHist} />
+
+        <button className="purchase-btn" onClick={toggleRSurePopuo} />
       </div>
       <div className="house-info">
         <img src={title} className="title" />
@@ -42,6 +60,16 @@ const DecorateHouse = () => {
           <GameLeaderboartItem />
         </div>
       </div>
+      {showRewardsHist && (
+        <RewardsHistoryPopup popUpHandler={toggleRewardsHist} />
+      )}
+      {showSurePopUp && (
+        <AreUSure
+          popUpHandeler={toggleRSurePopuo}
+          togglePurchasePopup={togglePurchasePopup}
+        />
+      )}
+      {purchasePopup && <Purchased popUpHandeler={togglePurchasePopup} />}
     </div>
   );
 };

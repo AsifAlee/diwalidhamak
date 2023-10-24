@@ -37,7 +37,6 @@ const JodiSlider = ({ data, showRanks, showIndicators }) => {
   };
 
   useEffect(() => {
-    console.log("component rendered");
     intervalId = setInterval(nextSlide, 2000);
     return () => {
       clearInterval(intervalId);

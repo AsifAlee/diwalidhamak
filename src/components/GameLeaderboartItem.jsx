@@ -1,6 +1,7 @@
 import React from "react";
 import borderRight from "../assets/images/decorate-house/leaderboard-no-line.png";
 import unknown from "../assets/images/unknown-user.png";
+import frame from "../assets/images/decorate-house/leaderboard-frame.png";
 import level from "../assets/images/level-img.png";
 import "../styles/game-leaderboard-item.scss";
 import LeaderBoardSlider from "./LeaderBoardSlider";
@@ -13,7 +14,10 @@ const GameLeaderboartItem = () => {
           <span>1</span>
         </div>
         <img src={borderRight} className="border-img" />
-        <img className="user-avatar" src={unknown} />
+        <div className="user-with-frame">
+          <img className="frame" src={frame} />
+          <img className="user-avatar" src={unknown} />
+        </div>
         <div className="user-details">
           <span>User Name</span>
           <img src={level} />

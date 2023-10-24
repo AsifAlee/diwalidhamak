@@ -3,12 +3,12 @@ export const userHourly = [
     rank: "1",
     pageRewards: [
       {
-        name: "Room icon ",
+        name: "Room icon",
         desc: "Room icon for next hour",
       },
       {
-        name: "entrance",
-        desc: "2 days __ entrance",
+        name: "Rusty Ranger Entrance",
+        desc: "2 days Rusty Ranger entrance",
       },
     ],
   },
@@ -16,8 +16,8 @@ export const userHourly = [
     rank: "2",
     pageRewards: [
       {
-        name: "entrance ",
-        desc: "2 days entrance",
+        name: "Rusty Ranger Entrance",
+        desc: "2 days Rusty Ranger Entrance",
       },
     ],
   },
@@ -25,8 +25,8 @@ export const userHourly = [
     rank: "3",
     pageRewards: [
       {
-        name: "entrance",
-        desc: "1 day entrance",
+        name: "1 day Rusty Ranger Entrance",
+        desc: "1 day Rusty Ranger Entrance",
       },
     ],
   },
@@ -41,8 +41,8 @@ export const talentHourly = [
         desc: "Room icon for next hour",
       },
       {
-        name: "profile frame",
-        desc: "2 days __ profile frame",
+        name: "Loved One Profile frame",
+        desc: "2 days Loved One Profile frame",
       },
     ],
   },
@@ -50,8 +50,8 @@ export const talentHourly = [
     rank: "2",
     pageRewards: [
       {
-        name: "profile frame",
-        desc: "2 days profile frame",
+        name: "Loved One Profile frame",
+        desc: "1 day Loved One Profile frame",
       },
     ],
   },
@@ -59,8 +59,8 @@ export const talentHourly = [
     rank: "3",
     pageRewards: [
       {
-        name: "profile frame",
-        desc: "1 day profile frame",
+        name: "Loved One Profile frame",
+        desc: "1 day Loved One Profile frame",
       },
     ],
   },

@@ -63,6 +63,42 @@
     }
   }
 
+   
+  .rew-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    // border: 2px solid;
+    .reward-item{
+      display: flex;
+      flex-direction: column;
+      width: 20vw;
+      height: 20vw;
+      // border: 1px solid;
+      // justify-content: center;
+      align-items: center;
+      
+
+      .image-div{
+        padding: 2vw;
+        background-image: url('../assets/images/rewards-base.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+        img{
+          width: 12vw;
+        }
+      }
+      
+
+      p{
+        font-size: 2vw;
+      }
+      
+    }
+
+   }
+
   .favrt-jodi-partnership {
     width: 90%;
     height: 59vw;
@@ -91,6 +127,7 @@
         position: relative;
         color: white;
         bottom: 2vw;
+        font-size: 7vw;
         
        }
       .time-unit {
@@ -108,6 +145,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          font-size: 4vw;
         }
         .unit {
           font-size: 3vw;
@@ -131,6 +169,7 @@
       background-repeat: no-repeat;
       background-size: 100% 100%;
       margin: 0 auto;
+      display: flex;
 
       .rank1-10{
         width: 24vw;
@@ -141,7 +180,7 @@
 
       }
       .rank11-20{
-        width: 24vw;
+        width: 27vw;
         height: 11vw;
         background-image: url("../assets//images/diwali-dhamka/rank-11-20.png");
       background-repeat: no-repeat;
@@ -149,7 +188,7 @@
 
       }
       .rank21-30{
-        width: 24vw;
+        width: 30vw;
         height: 11vw;
         background-image: url("../assets//images/diwali-dhamka/rank21-20.png");
       background-repeat: no-repeat;

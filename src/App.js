@@ -5,6 +5,7 @@ import TabButton from "./components/TabButtons";
 import DiwaliMela from "./pages/DiwaliMela";
 import DecorateHouse from "./pages/DecorateHouse";
 import EventGifting from "./pages/EventGifting";
+import Guide from "./popups/Guide";
 
 function App() {
   const [mainTabs, setMainTabs] = useState({
@@ -12,7 +13,9 @@ function App() {
     decorateHouse: false,
     gifting: false,
   });
+
   const [showGuide, setShowGuide] = useState(false);
+
   const toggleGuide = () => {
     setShowGuide((prevState) => !prevState);
   };
@@ -42,6 +45,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <button className="guide-btn" onClick={toggleGuide}></button>
       <div className="main-tabs">
         <TabButton
           handleClick={toggleMainTabs}
@@ -75,6 +79,8 @@ function App() {
       )}
       <p className="rights">All rights reserved by streamkar</p>
       <div className="footer"></div>
+
+      {showGuide && <Guide popUpHandeler={toggleGuide} />}
     </div>
   );
 }
