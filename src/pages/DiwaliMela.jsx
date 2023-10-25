@@ -15,10 +15,16 @@ import switchBg from "../assets/images/current-previous-btn-bg.png";
 import SwitchButton from "../components/SwitchButton";
 import JodiLeaderboardItem from "../components/JodiLeaderboardItem";
 import { AppContext } from "../AppContext";
-import { getRewardsImage } from "../functions";
+import { getRewardsImage, gotoProfile } from "../functions";
 import moment from "moment/moment";
+import RewardsHistoryPopup from "../popups/RewardsHistoryPopup";
+import Marquee from "react-fast-marquee";
+import unknowUser from "../assets/images/unknown-user.png";
+import { baseUrl, testToken, testUserId } from "../api";
+import Purchased from "../popups/Purchased";
+import DiwaliDhamakaGame from "../popups/DiwaliDhamakaGame";
 const DiwaliMela = () => {
-  const { info } = useContext(AppContext);
+  const { info, getGameRewardHistroy, getInfo } = useContext(AppContext);
 
   const [rewardsTabs, setRewardsTabs] = useState({
     user: true,
@@ -30,6 +36,23 @@ const DiwaliMela = () => {
     rank3: false,
   });
   const [isSliderOn, setIsSliderOn] = useState(false);
+  const [showRewardsHist, setShowRewardsHist] = useState(false);
+
+  const [isInputZero, setIsInputZero] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [inputValue, setInputValue] = useState(1);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isDecimalInput, setIsDecimalInput] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [errorCode, setErrorCode] = useState(null);
+  const [shakeText, setShakeText] = useState(false);
+  const [warn, setWarn] = useState("");
+  const [gamePopup, setGamePopup] = useState(false);
+  const [gameRewards, setGameRewards] = useState([]);
+
+  const toggleRewardsHist = () => {
+    setShowRewardsHist((prevState) => !prevState);
+  };
   const toggleRewardsTabs = (name) => {
     if (name === "user") {
       setRewardsTabs({
@@ -64,6 +87,11 @@ const DiwaliMela = () => {
       });
     }
   };
+
+  const toggleGamePopup = () => {
+    setIsDisabled(false);
+    setGamePopup((prevState) => !prevState);
+  };
   function handleSliderToggle(isOn) {
     setIsSliderOn(isOn);
   }
@@ -89,18 +117,13 @@ const DiwaliMela = () => {
     const seconds = now.getUTCSeconds();
     const milliseconds = now.getUTCMilliseconds();
 
-    console.log(
-      "time is",
-      `${year}-${month}-${day} 
-             ${hours}:${minutes}:${seconds}.${milliseconds}`
-    );
     var timertwelevehOur = " 11:59:59";
     var timertwentyFourhOur = " 23:59:59";
 
     var timerData = hours <= 12 ? timertwelevehOur : timertwentyFourhOur;
 
     let endTime = year + "-" + month + "-" + day + timerData;
-    console.log("end time:", endTime);
+    // console.log("end time:", endTime);
     let startTime = moment().utc().format("YYYY-MM-DD HH:mm:ss");
     let t = moment(endTime).diff(startTime) / 1000; //计算本地时间和utc时间差
 
@@ -118,17 +141,170 @@ const DiwaliMela = () => {
         clearInterval(timeInterval);
         return;
       }
-      console.log("d is:", d);
-      console.log("h is:", h);
-      console.log("m is:", m);
-      console.log("s is:", s);
+      // console.log("d is:", d);
+      // console.log("h is:", h);
+      // console.log("m is:", m);
+      // console.log("s is:", s);
     }, 1000);
   }
   timeSet();
 
+  const onUpCheck = (e) => {
+    let max;
+    if (/[+-.]/.test(e.key)) {
+      setInputValue("");
+    } else {
+      // let max = userInfo.throwsLeft < 99 ?  userInfo.throwsLeft : 99;
+      if (info.chances <= 99 && info.chances > 0) {
+        max = info.chances;
+      } else if (info.chances > 99) {
+        max = 99;
+      } else if (info.chances === 0) {
+        max = 1;
+      }
+      let number = inputValue > max ? max : inputValue <= 0 ? "" : inputValue;
+      setInputValue(parseInt(number));
+    }
+  };
+  const onChangeHandle = (event) => {
+    if (!event.target.value) {
+      setIsInputZero(true);
+    } else {
+      setIsInputZero(false);
+    }
+    setInputValue(parseInt(event.target.value));
+  };
+
+  const playGame = () => {
+    if (!inputValue) {
+      setWarn("Enter Some value");
+      setShakeText(true);
+      return;
+    } else {
+      setShakeText(false);
+    }
+    if (inputValue.toString().includes(".")) {
+      setIsDecimalInput(true);
+      setGamePopup(true);
+      return;
+    }
+
+    if (isDisabled) {
+      return;
+    }
+    setIsDisabled(true);
+    if (!inputValue) {
+      setIsInputZero(true);
+      setIsDisabled(false);
+      return;
+    }
+
+    fetch(
+      `${baseUrl}/api/activity/diwaliMela/playGame?playCount=${inputValue}`,
+      {
+        method: "POST",
+        headers: {
+          checkTag: "",
+          // userId: user.userId,
+          // token: user.token,
+          userId: testUserId,
+          token: testToken,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) =>
+        response.json().then((response) => {
+          setErrorCode(response.errorCode);
+          setErrMsg(response?.msg);
+          if (response.errorCode === 0) {
+            setIsPlaying(true);
+            setGameRewards(response.data.rewardContent.split("+"));
+            // setRewardsContent(response.data.rewardContent);
+
+            // getGameLeaderboardData();
+
+            // getInfo();
+          }
+          setTimeout(() => {
+            setGamePopup(true);
+            setIsPlaying(false);
+            getInfo();
+            setInputValue(1);
+            setIsDisabled(false);
+            getGameRewardHistroy();
+            // getGameLeaderboardData();
+          }, 3000);
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+        setInputValue(1);
+        setIsDisabled(false);
+        setIsPlaying(false);
+      });
+  };
+
   return (
     <div className="diwali-mela">
-      <div className="game-section"></div>
+      <div style={{ position: "relative", top: "-31vw" }}>
+        <Marquee>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+            return (
+              <div className="game-marquee">
+                <div className="marquee-item">
+                  <img
+                    src={unknowUser}
+                    className="marq-user-img"
+                    onClick={() => gotoProfile(item?.userId)}
+                  />
+
+                  <div
+                    className="marq-user-details"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    <p>
+                      <span className="name">{`${item?.nickname?.slice(
+                        0,
+                        6
+                      )} has successfully purchased sampe item and has won`}</span>
+
+                      <span className="rew-desc">{`${item?.userScore} Beans `}</span>
+                      <img src={bean} className="rew-img" />
+
+                      <span>.&nbsp;Congratulations!</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Marquee>
+      </div>
+
+      <div className="game-section">
+        <button className="reward-hist-btn" onClick={toggleRewardsHist} />
+
+        <div className="play-sec">
+          <p>My Chances:{info.gamePoints}</p>
+          <input
+            type="number"
+            value={inputValue}
+            min={1}
+            max={999}
+            onChange={onChangeHandle}
+            onKeyUp={onUpCheck}
+            pattern="[0-9]*"
+            style={{ border: isInputZero ? "1px solid red" : "" }}
+          />
+          {shakeText && (
+            <span className={`warning-text shaking-text`}>
+              Enter some value
+            </span>
+          )}
+          <button className="purchase-btn" onClick={playGame}></button>
+        </div>
+      </div>
       <div className="jodi-album-sec">
         <img className="title" src={albumTitle} />
         <JodiSlider data={jodiData} showIndicators={true} />
@@ -215,6 +391,17 @@ const DiwaliMela = () => {
           <JodiLeaderboardItem />
         </div>
       </div>
+      {showRewardsHist && (
+        <RewardsHistoryPopup popUpHandler={toggleRewardsHist} />
+      )}
+      {gamePopup && (
+        <DiwaliDhamakaGame
+          popUpHandeler={toggleGamePopup}
+          errorCode={errorCode}
+          gameRewards={gameRewards}
+          errMsg={errMsg}
+        />
+      )}
     </div>
   );
 };

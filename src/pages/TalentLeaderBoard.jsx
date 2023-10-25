@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TabButton from "../components/TabButtons";
 import SwitchButton from "../components/SwitchButton";
 import switchBg from "../assets/images/current-previous-btn-bg.png";
@@ -6,7 +6,12 @@ import currentBtn from "../assets/images/Current-btn.png";
 import prevButton from "../assets/images/prev-btn.png";
 import LeaderboardComponent from "../components/LeaderboardComponent";
 import { userHourlyNow, userHourlyPrev, userOverallData } from "../testData";
+import { AppContext } from "../AppContext";
 const TalentLeaderBoard = () => {
+  const { info, giftingLeaderboardData } = useContext(AppContext);
+
+  const { talentOverall, talentHourlyNow, talentHourlyPrev } =
+    giftingLeaderboardData;
   const [boardTabs, setBoardTabs] = useState({
     hourly: true,
     overall: false,
@@ -61,10 +66,10 @@ const TalentLeaderBoard = () => {
       <LeaderboardComponent
         data={
           boardTabs.overall
-            ? userOverallData
+            ? talentOverall
             : isSliderOn
-            ? userHourlyNow
-            : userHourlyPrev
+            ? talentHourlyNow
+            : talentHourlyPrev
         }
         isTalent={true}
       />

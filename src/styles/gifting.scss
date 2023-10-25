@@ -203,6 +203,20 @@
         display: block;
         margin: 0 auto;
       }
+
+      .noData{
+        
+    position: relative;
+    color: white;
+    width: 80%;
+    // border: 1px solid;
+    bottom: 54vw;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 4vw;
+
+      }
     }
 
   }

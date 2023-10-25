@@ -10,7 +10,9 @@ import { AppContext } from "../AppContext";
 import { userOverallPot } from "../beansPot";
 
 const UserLeaderBoard = () => {
-  const { info } = useContext(AppContext);
+  const { info, giftingLeaderboardData } = useContext(AppContext);
+  const { userOverll, userHourlyNow, userHourlyPrev } = giftingLeaderboardData;
+
   const [boardTabs, setBoardTabs] = useState({
     hourly: true,
     overall: false,
@@ -72,7 +74,7 @@ const UserLeaderBoard = () => {
       <LeaderboardComponent
         data={
           boardTabs.overall
-            ? userOverallData
+            ? userOverll
             : isSliderOn
             ? userHourlyNow
             : userHourlyPrev

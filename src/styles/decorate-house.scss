@@ -18,17 +18,59 @@
       right: 1vw;
     }
 
-    .purchase-btn{
-      width: 25vw;
-      height: 9vw;
-      background-image: url("../assets/images/popups/purchase-btn.png");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
+    .play-sec {
+      display: flex;
+      font-size: 2.5vw;
       position: absolute;
       bottom: 0vw;
-      left: 31vw;
+      color: white;
+      justify-content: space-around;
+      border: 1px solid;
+      width: 100%;
+      align-items: center;
+      .purchase-btn {
+        width: 25vw;
+        height: 9vw;
+        background-image: url("../assets/images/popups/purchase-btn.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        // position: absolute;
+        // bottom: 0vw;
+        // left: 31vw;
+      }
+    }
+    .house-items {
+      width: 90%;
+
+      display: flex;
+      flex-wrap: wrap;
+      position: absolute;
+      .house-item {
+        width: 26vw;
+        height: 29vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 20vw;
+        }
+        .item-details {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .purchase-single {
+          width: 15vw;
+          height: 5vw;
+          background-image: url("../assets/images/popups/purchase-btn.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+        }
+      }
     }
   }
+
   .house-info {
     width: 90%;
     height: 40vw;
@@ -71,8 +113,7 @@
       }
     }
   }
-  .rewards-leaderboard{
-
+  .rewards-leaderboard {
     width: 90%;
     height: 120vw;
     background-image: url("../assets//images/decorate-house/rewards-winners-bg.png");
@@ -81,22 +122,73 @@
     margin: 0 auto;
     position: relative;
 
-    .tag{
-        position: absolute;
-        top: 2vw;
-        width: 90%;
-        left: 5vw;
-    
+    .tag {
+      position: absolute;
+      top: 2vw;
+      width: 90%;
+      left: 5vw;
     }
-    .winners{
+    .winners {
+      position: relative;
+      top: 15vw;
+      width: 100%;
 
-    position: relative;
-    top: 15vw;
-    width: 100%;
-    
- 
-    display: flex;
-    justify-content: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .game-marquee {
+    .marquee-item {
+      display: flex;
+      font-size: 2vw;
+      color: white;
+      background-image: url("../assets/images/tickertape.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      height: 11vw;
+      display: flex;
+      align-items: center;
+      padding: 2vw;
+      padding-left: 3vw;
+      max-width: 70vw;
+
+      .marq-user-img {
+        width: 7vw;
+        border: 2px solid yellow;
+        border-radius: 100%;
+        position: relative;
+        top: 1vw;
+        right: 1vw;
+      }
+
+      .marq-user-details {
+        /* display: flex; */
+        align-items: center;
+        font-size: 2vw;
+        position: relative;
+        top: 2vw;
+        left: -1vw;
+        width: 78%;
+        /* flex-direction: column; */
+        /* border: 1px solid; */
+        height: 6vw;
+        overflow: hidden;
+        text-align: center;
+        line-height: 1.4vw;
+        .name {
+          margin-left: 0.5vw;
+        }
+        .rew-img {
+          width: 3vw;
+          position: relative;
+          bottom: -0.5vw;
+        }
+        .bean-img {
+          width: 3vw;
+          display: inline-block;
+        }
+      }
     }
   }
 }

@@ -1,175 +1,167 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont,'Roboto', 'Segoe UI', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-
-
-.tab-button{
+.tab-button {
   width: 29vw;
   height: 14vw;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
-.grayScaled{
+.grayScaled {
   filter: grayscale(1);
-  background-image: url('./logo.svg');
+  background-image: url("./logo.svg");
 }
-.d-flex{
+.d-flex {
   display: flex;
 }
-.j-center{
+.j-center {
   justify-content: center;
 }
-.al-center{
+.al-center {
   align-items: center;
-
 }
-.j-sa{
+.j-sa {
   justify-content: space-around;
 }
-.f-column{
+.f-column {
   flex-direction: column;
 }
-button{
+button {
   background: transparent;
   border: none;
   outline: none;
   box-shadow: none !important;
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.switch-key{
-  
-  
-      background: transparent;
-      border: none;
-      outline: none;
-      box-shadow: none !important;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    
+.switch-key {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.hide{
+.hide {
   /* visibility: hidden; */
   opacity: 0;
 }
-.show{
+.show {
   visibility: visible;
 }
 
-.blackBg{
+.blackBg {
   background-color: black;
 }
 
-.diwali-sel{
- background-image: url('./assets/images/diwali-sel.png'); 
+.diwali-sel {
+  background-image: url("./assets/images/diwali-sel.png");
 }
-.diwali-un{
-  background-image: url('./assets/images/diwali-un.png'); 
- }
- .decorate-sel{
-  background-image: url('./assets/images/decorate-sel.png'); 
- }
- .decorate-un{
-  background-image: url('./assets/images/decorate-un.png'); 
- }
+.diwali-un {
+  background-image: url("./assets/images/diwali-un.png");
+}
+.decorate-sel {
+  background-image: url("./assets/images/decorate-sel.png");
+}
+.decorate-un {
+  background-image: url("./assets/images/decorate-un.png");
+}
 
- .gifting-sel{
-  background-image: url('./assets/images/gifting-sel.png'); 
- }
- .gifting-un{
-  background-image: url('./assets/images/gifting-un.png'); 
- }
+.gifting-sel {
+  background-image: url("./assets/images/gifting-sel.png");
+}
+.gifting-un {
+  background-image: url("./assets/images/gifting-un.png");
+}
 
- .user-sel{
-  background-image: url('./assets/images/user-sel.png'); 
- }
- .user-un{
-  background-image: url('./assets/images/user-un.png'); 
- }
+.user-sel {
+  background-image: url("./assets/images/user-sel.png");
+}
+.user-un {
+  background-image: url("./assets/images/user-un.png");
+}
 
- .talent-sel{
-  background-image: url('./assets/images/talent-sel.png'); 
- }
- .talent-un{
-  background-image: url('./assets/images/talent-un.png'); 
- }
+.talent-sel {
+  background-image: url("./assets/images/talent-sel.png");
+}
+.talent-un {
+  background-image: url("./assets/images/talent-un.png");
+}
 
+.overall-sel {
+  background-image: url("./assets/images/overall-sel.png");
+}
+.overall-un {
+  background-image: url("./assets/images/overall-un.png");
+}
 
- .overall-sel{
-  background-image: url('./assets/images/overall-sel.png'); 
- }
- .overall-un{
-  background-image: url('./assets/images/overall-un.png'); 
- }
+.hourly-sel {
+  background-image: url("./assets/images/hourly-sel.png");
+}
+.hourly-un {
+  background-image: url("./assets/images/hourly-un.png");
+}
 
- .hourly-sel{
-  background-image: url('./assets/images/hourly-sel.png'); 
- }
- .hourly-un{
-  background-image: url('./assets/images/hourly-un.png'); 
- }
-
- .flip{
+.flip {
   transform: scaleX(-1);
- }
- .top1{
-  background-image: url('./assets/images/top-1.png');
- }
- .top2{
-  background-image: url('./assets/images/top-2-rank.png');
- }
- .top3{
-  background-image: url('./assets/images/top-3-rank.png');
- }
- .top4{
-  background-image: url('./assets/images/top-4-rank.png');
- }
- .top5{
-  background-image: url('./assets/images/top-5-rank.png');
- }
+}
+.top1 {
+  background-image: url("./assets/images/top-1.png");
+}
+.top2 {
+  background-image: url("./assets/images/top-2-rank.png");
+}
+.top3 {
+  background-image: url("./assets/images/top-3-rank.png");
+}
+.top4 {
+  background-image: url("./assets/images/top-4-rank.png");
+}
+.top5 {
+  background-image: url("./assets/images/top-5-rank.png");
+}
 
- .rank-bg{
+.rank-bg {
   width: 16vw;
   height: 5vw;
   background-repeat: no-repeat;
   background-size: 100% 100%;
- }
-.center{
+}
+.center {
   text-align: center;
 }
 
-.rights{
+.rights {
   text-align: center;
   color: white;
   position: relative;
   top: 3vw;
   font-size: 2.7vw;
 }
-.footer{
+.footer {
   width: 100%;
   height: 22vw;
-  background-image: url('./assets/images/footer-design.png');
+  background-image: url("./assets/images/footer-design.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border: none;
-
 }
 
-.p-rel{
+.p-rel {
   position: relative;
 }
-.yellow{
+.yellow {
   color: yellow;
 }
 
@@ -180,4 +172,5 @@ button{
   margin-right: 1vw;
   margin-left: 1vw;
 }
+
 

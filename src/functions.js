@@ -18,10 +18,14 @@ export function getRewardsImage(rewDesc) {
   var rewImg;
 
   if (rewDesc?.includes("SVIP")) {
-    rewImg = baseUrl + "/streamkar/rewards/valentineFrameUser.png";
+    rewImg = baseUrl + "/streamkar/rewards/svip.png";
   } else if (rewDesc?.includes("Spaceship Entrance")) {
     rewImg = baseUrl + "/streamkar/rewards/spaceship.png";
+  } else if (rewDesc?.includes("Spaceship entrance")) {
+    rewImg = baseUrl + "/streamkar/rewards/spaceship.png";
   } else if (rewDesc?.includes("Victory Slide Entrance")) {
+    rewImg = baseUrl + "/streamkar/rewards/victorySlide.png";
+  } else if (rewDesc?.includes("Victory Slide entrance")) {
     rewImg = baseUrl + "/streamkar/rewards/victorySlide.png";
   } else if (rewDesc?.includes("Premier Audio Theme")) {
     rewImg = baseUrl + "/streamkar/rewards/maharajaPremium.png";
@@ -29,13 +33,19 @@ export function getRewardsImage(rewDesc) {
     rewImg = baseUrl + "/streamkar/rewards/firebrand Profile frame.png";
   } else if (rewDesc?.includes("Sea Wolf Audio  theme")) {
     rewImg = baseUrl + "/streamkar/rewards/seaWolfRoomSkin.png";
+  } else if (rewDesc?.includes("Sea Wolf Audio theme")) {
+    rewImg = baseUrl + "/streamkar/rewards/seaWolfRoomSkin.png";
   } else if (rewDesc?.includes("Fury Profile Frame")) {
     rewImg = baseUrl + "/streamkar/rewards/furyFrame.png";
   } else if (rewDesc?.includes("Rusty Ranger Entrance")) {
     rewImg = baseUrl + "/streamkar/rewards/rustyRanger.png";
+  } else if (rewDesc?.includes("Rusty Ranger entrance")) {
+    rewImg = baseUrl + "/streamkar/rewards/rustyRanger.png";
   } else if (rewDesc?.includes("Loved One Profile frame")) {
     rewImg = baseUrl + "/streamkar/rewards/loveFrame.png";
   } else if (rewDesc?.includes("beans")) {
+    rewImg = baseUrl + "/streamkar/rewards/beanbag.png";
+  } else if (rewDesc?.includes("Beans")) {
     rewImg = baseUrl + "/streamkar/rewards/beanbag.png";
   } else if (rewDesc?.includes("Room icon")) {
     rewImg = baseUrl + "/streamkar/rewards/roomIcon.png";

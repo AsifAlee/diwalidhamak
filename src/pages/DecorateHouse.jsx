@@ -6,10 +6,23 @@ import GameLeaderboartItem from "../components/GameLeaderboartItem";
 import RewardsHistoryPopup from "../popups/RewardsHistoryPopup";
 import AreUSure from "../popups/AreUSure";
 import Purchased from "../popups/Purchased";
+import HouseItem from "../components/HouseItem";
+import unknowUser from "../assets/images/unknown-user.png";
+import { houseItems } from "../constants";
+import Marquee from "react-fast-marquee";
+import { useContext } from "react";
+import { AppContext } from "../AppContext";
+import { getRewardsImage, gotoProfile } from "../functions";
+import bean from "../assets/images/bean-icon.png";
+import { errorCodes } from "../api";
+
 const DecorateHouse = () => {
+  const { decorGameLeaderboard } = useContext(AppContext);
+
   const [showRewardsHist, setShowRewardsHist] = useState(false);
   const [showSurePopUp, setShowSurePopup] = useState(false);
   const [purchasePopup, setPurchasePopup] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
   const toggleRewardsHist = () => {
     setShowRewardsHist((prevState) => !prevState);
   };
@@ -22,10 +35,53 @@ const DecorateHouse = () => {
   };
   return (
     <div className="decorate-house">
+      <div style={{ position: "relative", top: "-31vw" }}>
+        <Marquee>
+          {decorGameLeaderboard?.map((item) => {
+            return (
+              <div className="game-marquee">
+                <div className="marquee-item">
+                  <img
+                    src={unknowUser}
+                    className="marq-user-img"
+                    onClick={() => gotoProfile(item?.userId)}
+                  />
+
+                  <div
+                    className="marq-user-details"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    <p>
+                      <span className="name">{`${item?.nickname?.slice(
+                        0,
+                        6
+                      )} has successfully purchased sampe item and has won`}</span>
+
+                      <span className="rew-desc">{`${item?.userScore} Beans `}</span>
+                      <img src={bean} className="rew-img" />
+
+                      <span>.&nbsp;Congratulations!</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Marquee>
+      </div>
       <div className="decorate-house-game">
+        <div className="house-items">
+          {houseItems.map((item) => (
+            <HouseItem item={item} />
+          ))}
+        </div>
         <button className="reward-hist-btn" onClick={toggleRewardsHist} />
 
-        <button className="purchase-btn" onClick={toggleRSurePopuo} />
+        <div className="play-sec">
+          <p>Festive Tokens:XXX</p>
+          <p>Play</p>
+          <button className="purchase-btn" onClick={toggleRSurePopuo} />
+        </div>
       </div>
       <div className="house-info">
         <img src={title} className="title" />
@@ -69,7 +125,13 @@ const DecorateHouse = () => {
           togglePurchasePopup={togglePurchasePopup}
         />
       )}
-      {purchasePopup && <Purchased popUpHandeler={togglePurchasePopup} />}
+      {purchasePopup && (
+        <Purchased
+          popUpHandeler={togglePurchasePopup}
+          errorCode={errorCodes.succes}
+          errMsg={errMsg}
+        />
+      )}
     </div>
   );
 };

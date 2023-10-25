@@ -62,6 +62,7 @@ const LeaderboardComponent = ({
           />
         ))}
       </div>
+      {!data.length && <div className="noData">No Data Found</div>}
       {data.length > 10 && (
         <button
           className={seeMore ? "see-more" : "see-less"}

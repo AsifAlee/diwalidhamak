@@ -27,11 +27,11 @@ const LeaderBoardItem = ({
         <div className="user-details">
           <span className="name">{user.nickname}</span>
           <img
-            // src={getLevelImage(
-            //   isTalent ? user.actorLevel : user.userLevel,
-            //   isTalent
-            // )}
-            src={level}
+            src={getLevelImage(
+              isTalent ? user.actorLevel : user.userLevel,
+              isTalent
+            )}
+            // src={level}
             style={{ width: isTalent && "8vw" }}
           />
         </div>
@@ -48,7 +48,7 @@ const LeaderBoardItem = ({
 
       <div className="rightDiv">
         <img src={isTalent ? gems : beanIcon} />
-        <span>{user.count}</span>
+        <span>{user.userScore}</span>
       </div>
     </div>
   );

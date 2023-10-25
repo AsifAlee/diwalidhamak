@@ -31,16 +31,16 @@ const Topper = (props) => {
           src={index === 1 ? rank1 : index === 2 ? rank2 : rank3}
           className={index === 1 ? "rank" : index === 2 ? "rank2" : "rank3"}
         />
-        <img src={user.avatar ? user.avatar : unknown} className="user" />
+        <img src={user.portrait ? user.portrait : unknown} className="user" />
       </div>
       <div className="topper-details">
         <p className="name">{user.nickname}</p>
         <img
-          //   src={getLevelImage(
-          //     isTalent ? user.actorLevel : user.userLevel,
-          //     isTalent
-          //   )}
-          src={levelImg}
+          src={getLevelImage(
+            isTalent ? user.actorLevel : user.userLevel,
+            isTalent
+          )}
+          // src={levelImg}
           className="levelImg"
           style={{ width: isTalent && "6vw" }}
         />
@@ -56,7 +56,7 @@ const Topper = (props) => {
 
         <div className="beans-spent">
           <img src={isTalent ? gems : beans} />
-          <span>{user.count}</span>
+          <span>{user.userScore}</span>
         </div>
       </div>
     </div>

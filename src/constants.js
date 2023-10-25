@@ -25,7 +25,7 @@ export const userHourly = [
     rank: "3",
     pageRewards: [
       {
-        name: "1 day Rusty Ranger Entrance",
+        name: "Rusty Ranger Entrance",
         desc: "1 day Rusty Ranger Entrance",
       },
     ],
@@ -153,5 +153,28 @@ export const talentOverall = [
         desc: "5 days Audio room theme",
       },
     ],
+  },
+];
+
+export const houseItems = [
+  {
+    name: "Lantern",
+    tokens: 3000,
+  },
+  {
+    name: "Lights",
+    tokens: 7000,
+  },
+  {
+    name: "Speakers",
+    tokens: 10000,
+  },
+  {
+    name: "TV",
+    tokens: 16000,
+  },
+  {
+    name: "Furniture",
+    tokens: 20000,
   },
 ];
