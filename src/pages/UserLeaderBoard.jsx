@@ -19,6 +19,7 @@ const UserLeaderBoard = () => {
   });
   const [isSliderOn, setIsSliderOn] = useState(false);
   const toggleBoardTabs = (name) => {
+    setIsSliderOn(false);
     if (name === "hourly") {
       setBoardTabs({
         hourly: true,

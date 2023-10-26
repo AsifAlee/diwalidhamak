@@ -24,7 +24,7 @@
     background-size: 100% 100%;
     position: relative;
 
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
   }
 
   .guide {
@@ -147,10 +147,13 @@
       }
       .no-rec-found {
         position: relative;
-        top: 18vw;
+        top: 24vw;
         font-size: 5vw;
         font-family: "ROG";
         color: white;
+ 
+        text-align: center;
+    
       }
     }
     .history-content::-webkit-scrollbar {

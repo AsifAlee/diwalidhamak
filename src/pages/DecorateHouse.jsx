@@ -18,21 +18,63 @@ import { errorCodes } from "../api";
 
 const DecorateHouse = () => {
   const { decorGameLeaderboard } = useContext(AppContext);
-
   const [showRewardsHist, setShowRewardsHist] = useState(false);
   const [showSurePopUp, setShowSurePopup] = useState(false);
   const [purchasePopup, setPurchasePopup] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [id, setId] = useState(0);
   const toggleRewardsHist = () => {
     setShowRewardsHist((prevState) => !prevState);
   };
   const toggleRSurePopuo = () => {
     setShowSurePopup((prevState) => !prevState);
   };
+  const setItemId = (id) => {
+    setId(id);
+  };
   const togglePurchasePopup = () => {
     setShowSurePopup(false);
     setPurchasePopup((prevState) => !prevState);
   };
+
+  const [errorCode, setErrorCode] = useState(null);
+
+  // const purchaseItem = (id) => {
+  //   fetch(`${baseUrl}/api/activity/diwaliMela/decorateHouse?index=${id}`, {
+  //     method: "POST",
+  //     headers: {
+  //       checkTag: "",
+  //       // userId: user.userId,
+  //       // token: user.token,
+  //       userId: testUserId,
+  //       token: testToken,
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) =>
+  //       response.json().then((response) => {
+  //         setErrorCode(response.errorCode);
+  //         setErrMsg(response?.msg);
+  //         if (response.errorCode === 0) {
+  //           // setIsPlaying(true);
+  //           // setRewardsContent(response.data.rewardContent);
+  //           // getGameLeaderboardData();
+  //           // getInfo();
+  //         }
+  //         setTimeout(() => {
+  //           // setIsPlaying(false);
+  //           // getInfo();
+  //           // setIsDisabled(false);
+  //         }, 3000);
+  //       })
+  //     )
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setInputValue(1);
+  //       setIsDisabled(false);
+  //       setIsPlaying(false);
+  //     });
+  // };
   return (
     <div className="decorate-house">
       <div style={{ position: "relative", top: "-31vw" }}>
@@ -72,7 +114,11 @@ const DecorateHouse = () => {
       <div className="decorate-house-game">
         <div className="house-items">
           {houseItems.map((item) => (
-            <HouseItem item={item} />
+            <HouseItem
+              item={item}
+              toggleRSurePopuo={toggleRSurePopuo}
+              setItemId={setItemId}
+            />
           ))}
         </div>
         <button className="reward-hist-btn" onClick={toggleRewardsHist} />
@@ -113,7 +159,9 @@ const DecorateHouse = () => {
       <div className="rewards-leaderboard">
         <img src={leaderboardTag} className="tag" />
         <div className="winners">
-          <GameLeaderboartItem />
+          {decorGameLeaderboard.map((item, index) => (
+            <GameLeaderboartItem item={item} index={index} />
+          ))}
         </div>
       </div>
       {showRewardsHist && (
@@ -123,6 +171,7 @@ const DecorateHouse = () => {
         <AreUSure
           popUpHandeler={toggleRSurePopuo}
           togglePurchasePopup={togglePurchasePopup}
+          tokens={houseItems.find((item) => item.id === id).tokens}
         />
       )}
       {purchasePopup && (

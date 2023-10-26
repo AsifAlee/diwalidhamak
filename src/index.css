@@ -172,5 +172,8 @@ button {
   margin-right: 1vw;
   margin-left: 1vw;
 }
+.blackNWhite{
+  filter: grayscale(1);
+}
 
 

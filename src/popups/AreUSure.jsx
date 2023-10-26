@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/popups.scss";
 import bg from "../assets/images/popups/purchase-popup-bg.png";
 import PopUp from "../components/Popup";
 import title from "../assets/images/popups/ruSure.png";
-const AreUSure = ({ popUpHandeler, togglePurchasePopup }) => {
+const AreUSure = ({
+  popUpHandeler,
+  togglePurchasePopup,
+  houseItems,
+  item,
+  tokens,
+}) => {
   return (
     <PopUp bg={bg} sure={true}>
       <div className="areUSure">
         <img src={title} className="title" />
         <div className="sure-content">
-          XXXX Festive Tokens will be deducted from your account if you want to
-          purchase this item.
+          {tokens} Festive Tokens will be deducted from your account if you want
+          to purchase this item.
         </div>
         <button
           className="purchase-btn"

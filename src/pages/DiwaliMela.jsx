@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/diwalimela.scss";
 import albumTitle from "../assets/images/diwali-dhamka/Best-partnership-album-text.png";
 import parternshipTitle from "../assets/images/diwali-dhamka/Festival-favourite-partnership-text.png";
@@ -23,8 +23,10 @@ import unknowUser from "../assets/images/unknown-user.png";
 import { baseUrl, testToken, testUserId } from "../api";
 import Purchased from "../popups/Purchased";
 import DiwaliDhamakaGame from "../popups/DiwaliDhamakaGame";
+import token from "../assets/images/diwali-dhamka/token-icon.png";
 const DiwaliMela = () => {
-  const { info, getGameRewardHistroy, getInfo } = useContext(AppContext);
+  const { info, getGameRewardHistroy, getInfo, partnershipData, user } =
+    useContext(AppContext);
 
   const [rewardsTabs, setRewardsTabs] = useState({
     user: true,
@@ -49,6 +51,7 @@ const DiwaliMela = () => {
   const [warn, setWarn] = useState("");
   const [gamePopup, setGamePopup] = useState(false);
   const [gameRewards, setGameRewards] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
 
   const toggleRewardsHist = () => {
     setShowRewardsHist((prevState) => !prevState);
@@ -105,6 +108,14 @@ const DiwaliMela = () => {
   const [hrs, setHours] = useState(null);
   const [mins, setMins] = useState(null);
   const [secs, setSecs] = useState(null);
+
+  useEffect(() => {
+    if (isSliderOn) {
+      setCurrentData(partnershipData?.prev);
+    } else {
+      setCurrentData(partnershipData?.current);
+    }
+  }, [isSliderOn, partnershipData]);
 
   function timeSet() {
     const now = new Date();
@@ -170,6 +181,7 @@ const DiwaliMela = () => {
     if (!event.target.value) {
       setIsInputZero(true);
     } else {
+      setShakeText(false);
       setIsInputZero(false);
     }
     setInputValue(parseInt(event.target.value));
@@ -205,10 +217,10 @@ const DiwaliMela = () => {
         method: "POST",
         headers: {
           checkTag: "",
-          // userId: user.userId,
-          // token: user.token,
-          userId: testUserId,
-          token: testToken,
+          userId: user.userId,
+          token: user.token,
+          // userId: testUserId,
+          // token: testToken,
           "Content-Type": "application/json",
         },
       }
@@ -283,10 +295,16 @@ const DiwaliMela = () => {
       </div>
 
       <div className="game-section">
+        <p className="tokens">
+          Festive Tokens={info.festiveToken} <img src={token} />
+        </p>
+        <p className="info-text">
+          25k <img src={bean} /> on event gifts = 1 Chance
+        </p>
         <button className="reward-hist-btn" onClick={toggleRewardsHist} />
 
         <div className="play-sec">
-          <p>My Chances:{info.gamePoints}</p>
+          <p className="my-chances">My Chances:{info.gamePoints}</p>
           <input
             type="number"
             value={inputValue}
@@ -295,14 +313,17 @@ const DiwaliMela = () => {
             onChange={onChangeHandle}
             onKeyUp={onUpCheck}
             pattern="[0-9]*"
-            style={{ border: isInputZero ? "1px solid red" : "" }}
+            // style={{ border: isInputZero ? "1px solid red" : "" }}
           />
           {shakeText && (
             <span className={`warning-text shaking-text`}>
               Enter some value
             </span>
           )}
-          <button className="purchase-btn" onClick={playGame}></button>
+          <button
+            className={`launch-btn ${isDisabled && "blackNWhite"}`}
+            onClick={playGame}
+          ></button>
         </div>
       </div>
       <div className="jodi-album-sec">
@@ -387,8 +408,24 @@ const DiwaliMela = () => {
             />
           </div>
         </div>
-        <div className="d-flex j-center">
-          <JodiLeaderboardItem />
+        <div className="contributors-items">
+          {leaderboardTabs.rank1
+            ? currentData
+                .slice(0, 10)
+                ?.map((partners, index) => (
+                  <JodiLeaderboardItem partners={partners} index={index} />
+                ))
+            : leaderboardTabs.rank2
+            ? currentData
+                .slice(10, 21)
+                ?.map((partners, index) => (
+                  <JodiLeaderboardItem partners={partners} index={index} />
+                ))
+            : currentData
+                .slice(21, 31)
+                ?.map((partners, index) => (
+                  <JodiLeaderboardItem partners={partners} index={index} />
+                ))}
         </div>
       </div>
       {showRewardsHist && (

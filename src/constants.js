@@ -158,22 +158,27 @@ export const talentOverall = [
 
 export const houseItems = [
   {
+    id: 1,
     name: "Lantern",
     tokens: 3000,
   },
   {
+    id: 2,
     name: "Lights",
     tokens: 7000,
   },
   {
+    id: 3,
     name: "Speakers",
     tokens: 10000,
   },
   {
+    id: 4,
     name: "TV",
     tokens: 16000,
   },
   {
+    id: 5,
     name: "Furniture",
     tokens: 20000,
   },

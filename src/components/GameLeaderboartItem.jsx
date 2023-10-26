@@ -6,12 +6,14 @@ import level from "../assets/images/level-img.png";
 import "../styles/game-leaderboard-item.scss";
 import LeaderBoardSlider from "./LeaderBoardSlider";
 import { leaderBoardSliderData } from "../testData";
-const GameLeaderboartItem = () => {
+import { getLevelImage } from "../functions";
+import bean from "../assets/images/bean-icon.png";
+const GameLeaderboartItem = ({ item, index }) => {
   return (
     <div className="game-board-item">
       <div className="leftDiv">
         <div className="index">
-          <span>1</span>
+          <span>{index + 1}</span>
         </div>
         <img src={borderRight} className="border-img" />
         <div className="user-with-frame">
@@ -19,12 +21,14 @@ const GameLeaderboartItem = () => {
           <img className="user-avatar" src={unknown} />
         </div>
         <div className="user-details">
-          <span>User Name</span>
-          <img src={level} />
+          <span>{item.nickname}</span>
+          <img src={getLevelImage(item.userLevel)} />
         </div>
       </div>
-      <div className="right-div">
-        <LeaderBoardSlider rewards={leaderBoardSliderData} />
+      <div className="rightDiv">
+        {/* <LeaderBoardSlider rewards={leaderBoardSliderData} /> */}
+        <img src={bean} />
+        <span>{item.userScore}</span>
       </div>
     </div>
   );

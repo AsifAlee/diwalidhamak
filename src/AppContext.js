@@ -13,6 +13,11 @@ const EventProvider = ({ children }) => {
     userId: 0,
     token: "",
   });
+  const date = new Date();
+  const dateStr = date.toISOString().split("T")[0];
+
+  const hour = date.getUTCHours();
+  const prevHour = hour - 1;
 
   const [giftingLeaderboardData, setGiftingLeaderboardData] = useState({
     userOverll: [],
@@ -21,6 +26,10 @@ const EventProvider = ({ children }) => {
     userHourlyPrev: [],
     talentHourlyNow: [],
     talentHourlyPrev: [],
+  });
+  const [partnershipData, setPartnershipData] = useState({
+    current: [],
+    prev: [],
   });
   const [diwaliGameLeaderboard, setDiwaliGameLeaderboard] = useState([]);
   const [decorGameLeaderboard, setDecorGameLeaderboard] = useState([]);
@@ -56,6 +65,12 @@ const EventProvider = ({ children }) => {
     getGameRewardHistroy();
     getGameRewardLeaderboard();
     getDecorateGameLeaderboard();
+    getUserHourly();
+    getUserHourlyPrev();
+    getTalentHourly();
+    getTalentHourlyPrev();
+    getPartnershipData(1);
+    getPartnershipData(0);
   }, [info]);
 
   useEffect(() => {
@@ -87,6 +102,82 @@ const EventProvider = ({ children }) => {
         console.error(error);
       });
   };
+
+  const getUserHourly = () => {
+    fetch(
+      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=13&pageNum=1&pageSize=20&dayIndex=${
+        dateStr + "_" + hour
+      }`
+    )
+      .then((response) =>
+        response.json().then((response) => {
+          setGiftingLeaderboardData((prevState) => ({
+            ...prevState,
+            userHourlyNow: response?.data?.list || [],
+          }));
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const getUserHourlyPrev = () => {
+    fetch(
+      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=13&pageNum=1&pageSize=20&dayIndex=${
+        dateStr + "_" + prevHour
+      }`
+    )
+      .then((response) =>
+        response.json().then((response) => {
+          setGiftingLeaderboardData((prevState) => ({
+            ...prevState,
+            userHourlyPrev: response?.data?.list || [],
+          }));
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const getTalentHourly = () => {
+    fetch(
+      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=14&pageNum=1&pageSize=20&dayIndex=${
+        dateStr + "_" + hour
+      }`
+    )
+      .then((response) =>
+        response.json().then((response) => {
+          setGiftingLeaderboardData((prevState) => ({
+            ...prevState,
+            talentHourlyNow: response?.data?.list || [],
+          }));
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const getTalentHourlyPrev = () => {
+    fetch(
+      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=14&pageNum=1&pageSize=20&dayIndex=${
+        dateStr + "_" + prevHour
+      }`
+    )
+      .then((response) =>
+        response.json().then((response) => {
+          setGiftingLeaderboardData((prevState) => ({
+            ...prevState,
+            talentHourlyPrev: response?.data?.list || [],
+          }));
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const getTalentOverall = () => {
     fetch(
       `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=12&pageNum=1&pageSize=20&dayIndex=1`
@@ -106,7 +197,7 @@ const EventProvider = ({ children }) => {
 
   const getGameRewardHistroy = () => {
     fetch(
-      `${baseUrl}/api/activity/eidF/getRecordInfo?eventDesc=20231108_diwali&rankIndex=21&pageNum=1&pageSize=20&type=1&userId=${testUserId}`
+      `${baseUrl}/api/activity/eidF/getRecordInfo?eventDesc=20231108_diwali&rankIndex=21&pageNum=1&pageSize=20&type=1&userId=${user.userId}`
     )
       .then((response) =>
         response.json().then((response) => {
@@ -146,6 +237,30 @@ const EventProvider = ({ children }) => {
       });
   };
 
+  const getPartnershipData = (id) => {
+    fetch(
+      `${baseUrl}/api/activity/diwaliMela/getPartnerShipRankInfo?isCurrent=${id}&pageNum=1&pageSize=20`
+    )
+      .then((response) =>
+        response.json().then((response) => {
+          if (id == 1) {
+            setPartnershipData((prevState) => ({
+              ...prevState,
+              current: response?.data?.list || [],
+            }));
+          } else {
+            setPartnershipData((prevState) => ({
+              ...prevState,
+              prev: response?.data?.list || [],
+            }));
+          }
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -158,6 +273,8 @@ const EventProvider = ({ children }) => {
         decorGameLeaderboard,
         getInfo,
         getGameRewardHistroy,
+        partnershipData,
+        user,
       }}
     >
       {children}

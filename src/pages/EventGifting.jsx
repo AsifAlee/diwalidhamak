@@ -52,9 +52,9 @@ const EventGifting = () => {
       <div className="event-gifts">
         <img className="title" src={giftsTitle} />
         <div className="gifts-row">
-          <Gift />
-          <Gift />
-          <Gift />
+          <Gift id="40001322" name="Balle Balle" price="200" />
+          <Gift id="40001499" name="You're the best!" price="8000" />
+          <Gift id="40001508" name="Celebrations" price="50,000" />
         </div>
       </div>
       <div className="beans-pot">
