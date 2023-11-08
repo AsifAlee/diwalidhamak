@@ -1,3 +1,9 @@
+import Lantern from "./assets/images/decorate-house//Lartern.png";
+import lights from "./assets/images/decorate-house/Light.png";
+import sofa from "./assets/images/decorate-house/sofa-set.png";
+import studyArea from "./assets/images/decorate-house/study-table.png";
+import bed from "./assets/images/decorate-house/bed.png";
+
 export const userHourly = [
   {
     rank: "1",
@@ -51,7 +57,7 @@ export const talentHourly = [
     pageRewards: [
       {
         name: "Loved One Profile frame",
-        desc: "1 day Loved One Profile frame",
+        desc: "2 days Loved One Profile frame",
       },
     ],
   },
@@ -119,12 +125,12 @@ export const talentOverall = [
     rank: "1",
     pageRewards: [
       {
-        name: "Proﬁle frame",
-        desc: "15 days Proﬁle frame",
+        name: "Game Battle Profile frame",
+        desc: "15 days Game Battle Proﬁle frame",
       },
       {
-        name: "Audio room theme",
-        desc: "15 days Audio room theme",
+        name: "Game Master Audio theme",
+        desc: "15 days Game Master Audio theme",
       },
     ],
   },
@@ -132,12 +138,12 @@ export const talentOverall = [
     rank: "2",
     pageRewards: [
       {
-        name: "Proﬁle frame",
-        desc: "7 days Proﬁle frame",
+        name: "Game Battle Profile frame",
+        desc: "7 days Game Battle Profile frame",
       },
       {
-        name: "Audio room theme",
-        desc: "7 days Audio room theme",
+        name: "Game Master Audio theme",
+        desc: "7 days Game Master Audio theme",
       },
     ],
   },
@@ -145,12 +151,12 @@ export const talentOverall = [
     rank: "3",
     pageRewards: [
       {
-        name: "Proﬁle frame",
-        desc: "5 days Proﬁle frame",
+        name: "Game Battle Profile frame",
+        desc: "5 days Game Battle Proﬁle frame",
       },
       {
-        name: "Audio room theme",
-        desc: "5 days Audio room theme",
+        name: "Game Master Audio theme",
+        desc: "5 days Game Master Audio theme",
       },
     ],
   },
@@ -161,25 +167,30 @@ export const houseItems = [
     id: 1,
     name: "Lantern",
     tokens: 3000,
+    img: Lantern,
   },
   {
     id: 2,
     name: "Lights",
     tokens: 7000,
+    img: lights,
   },
   {
     id: 3,
-    name: "Speakers",
+    name: "Sofa",
     tokens: 10000,
+    img: sofa,
   },
   {
     id: 4,
-    name: "TV",
+    name: "Study Area",
     tokens: 16000,
+    img: studyArea,
   },
   {
     id: 5,
-    name: "Furniture",
+    name: "Bedroom Decoration",
     tokens: 20000,
+    img: bed,
   },
 ];

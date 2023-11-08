@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/carousel.scss";
+import { useSwipeable } from "react-swipeable";
 export const CarouselItem = ({ children, width }) => {
   return (
     <div className="carousel-item" style={{ width: width }}>
@@ -11,40 +12,43 @@ const Carousel = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const sliderLength = React.Children.count(children);
   let intervalId = null;
-  console.log("index is:", activeIndex);
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+  });
   const nextSlide = () => {
-    if (activeIndex >= sliderLength.length - 1) {
+    if (activeIndex >= React.Children.count(children) - 1) {
       setActiveIndex(0);
     } else setActiveIndex((prev) => prev + 1);
   };
   const prevSlide = () => {
     if (activeIndex === 0) {
-      setActiveIndex(sliderLength.length - 1);
+      setActiveIndex(React.Children.count(children) - 1);
     } else {
       setActiveIndex((prev) => prev - 1);
     }
   };
 
-  //   const updateIndex = (newIndex) => {
-  //     if (newIndex < 0) {
-  //       newIndex = React.Children.count(children) - 1;
-  //     } else if (newIndex > React.Children.count(children) - 1) {
-  //       // newIndex = React.Children.count(children) - 1;
-  //       newIndex = 0;
-  //     }
-  //     setActiveIndex(newIndex);
+  // const updateIndex = (newIndex) => {
+  //   if (newIndex < 0) {
+  //     newIndex = React.Children.count(children) - 1;
+  //     // debugger;
+  //   } else if (newIndex > React.Children.count(children) - 1) {
+  //     newIndex = 0;
+  //   }
+  //   setActiveIndex(newIndex);
+  // };
+  // useEffect(() => {
+  //   intervalId = setInterval(nextSlide, 2000);
+  //   return () => {
+  //     clearInterval(intervalId);
   //   };
-  useEffect(() => {
-    intervalId = setInterval(nextSlide, 2000);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [activeIndex]);
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [React.Children]);
+  // }, [activeIndex]);
+  // useEffect(() => {
+  //   setActiveIndex(0);
+  // }, []);
   return (
-    <div className="carousel">
+    <div className="carousel" {...handlers}>
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -53,18 +57,18 @@ const Carousel = ({ children }) => {
           return React.cloneElement(child, { width: "100%" });
         })}
       </div>
-      <div className="nxt-prev-btns">
+      {/* <div className="nxt-prev-btns">
         <button
           className="prev"
-          //   onClick={() => updateIndex(activeIndex - 1)}
+          // onClick={() => updateIndex(activeIndex - 1)}
           onClick={prevSlide}
         ></button>
         <button
           className="next"
-          //   onClick={() => updateIndex(activeIndex + 1)}
+          // onClick={() => updateIndex(activeIndex + 1)}
           onClick={nextSlide}
         ></button>
-      </div>
+      </div> */}
 
       <div className="indicators">
         {/* <button onClick={() => updateIndex(activeIndex - 1)}>Prev</button> */}

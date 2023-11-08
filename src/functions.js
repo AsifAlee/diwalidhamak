@@ -11,6 +11,8 @@ export const getLevelImage = (level, isTalent) => {
 };
 
 export const gotoProfile = (id) => {
+  // debugger
+  // return;
   window.location.href = `http://www.kktv1.com/m/?roomid=${id}`;
 };
 
@@ -28,7 +30,7 @@ export function getRewardsImage(rewDesc) {
   } else if (rewDesc?.includes("Victory Slide entrance")) {
     rewImg = baseUrl + "/streamkar/rewards/victorySlide.png";
   } else if (rewDesc?.includes("Premier Audio Theme")) {
-    rewImg = baseUrl + "/streamkar/rewards/maharajaPremium.png";
+    rewImg = baseUrl + "/streamkar/rewards/premiumSkin.png";
   } else if (rewDesc?.includes("FireBrand Profile Frame")) {
     rewImg = baseUrl + "/streamkar/rewards/firebrand Profile frame.png";
   } else if (rewDesc?.includes("Sea Wolf Audio  theme")) {
@@ -51,6 +53,12 @@ export function getRewardsImage(rewDesc) {
     rewImg = baseUrl + "/streamkar/rewards/roomIcon.png";
   } else if (rewDesc?.includes("Bunny profile Frame")) {
     rewImg = baseUrl + "/streamkar/rewards/bunnyFrame.gif";
+  } else if (rewDesc?.includes("Festive Token")) {
+    rewImg = baseUrl + "/streamkar/rewards/FestiveToken.png";
+  } else if (rewDesc?.includes("Game Master Audio theme")) {
+    rewImg = baseUrl + "/streamkar/rewards/gameMasterRoomSkin.png";
+  } else if (rewDesc?.includes("Game Battle Profile frame")) {
+    rewImg = baseUrl + "/streamkar/rewards/gameMasterFarme.png";
   } else {
     rewImg = baseUrl + "/streamkar/rewards/noRew.png";
   }
@@ -72,6 +80,8 @@ export const getRewardDetails = (desc, count) => {
     ? (text = `${count} Growth Points`)
     : desc === "Firepower"
     ? (text = `${count} Firepower`)
+    : desc === "Festive Token"
+    ? (text = `${count} Festive Tokens`)
     : (text = `${desc}  x${count > 1 ? `${count} days` : `${count} day`}`);
 
   return text;

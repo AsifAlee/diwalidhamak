@@ -8,6 +8,7 @@
       width: 100%;
       position: relative;
       z-index: 1;
+      pointer-events: none;
     }
     .user-img{
         width: 15vw;
@@ -16,6 +17,7 @@
         left: 12vw;
         top: 14vw;
         z-index: 0;
+        border-radius: 100%;
     }
     .talent-img{
         width: 15vw;
@@ -24,16 +26,39 @@
         left: 30vw;
         top: 14vw;
         z-index: 0;
+        border-radius: 100%;
+    }
+  }
+  .level-images{
+    position: relative;
+    top: 3vw;
+
+    .user{
+      position: absolute;
+      width: 13vw;
+      z-index: 1;
+      top: -9vw;
+      left: 15vw;
+  
+
+    }
+    .talent{
+      position: absolute;
+      width: 7vw;
+      top: -9vw;
+      left: 34vw;
+      z-index: 1;
     }
   }
   .names {
-    color: white;
     display: flex;
     position: relative;
-    left: 5vw;
-    top: -6vw;
+    left: 2vw;
+    top: -2vw;
     color: white;
     font-size: 2.3vw;
+    justify-content: center;
+    align-items: center;
     .uname {
       width: 25vw;
       height: 8vw;
@@ -48,6 +73,8 @@
 
       .beans-div {
         display: flex;
+        justify-content: center;
+        align-items: center;
 
         img {
           width: 3vw;
@@ -68,11 +95,32 @@
     
       .beans-div {
         display: flex;
-
+        justify-content: center;
+        align-items: center;
         img {
           width: 3vw;
         }
       }
     }
+  }
+  .expected-beans{
+
+    height: 6vw;
+    background-image: url('../assets/images/diwali-dhamka/expected-beans.png');
+   background-size: 100% 100%;
+
+
+    position: absolute;
+    left: 19vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    font-weight: bold;
+    flex-direction: column;
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import unknow from "../assets/images/unknown-user.png";
-import level from "../assets/images/level-img.png";
+// import level from "../assets/images/level-img.png";
 import beanIcon from "../assets/images/bean-icon.png";
 import gems from "../assets/images/gems.png";
 import { getLevelImage, gotoProfile } from "../functions";

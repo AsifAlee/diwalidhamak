@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import SliderDot from "./SliderDot";
 import "../styles/jodi-slider.scss";
 import JodiComponent from "./JodiComponent";
+import { useSwipeable } from "react-swipeable";
 
 const JodiSlider = ({ data, showRanks, showIndicators }) => {
+  console.log("jodi data is:", data);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStartX, setTouchStartX] = useState(null);
+  // const [touchStartX, setTouchStartX] = useState(null);
 
   let intervalId = null;
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+  });
   const nextSlide = () => {
     setCurrentIndex((prevState) =>
       prevState === data.length - 1 ? 0 : prevState + 1
@@ -19,25 +26,8 @@ const JodiSlider = ({ data, showRanks, showIndicators }) => {
     );
   };
 
-  const handleTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchDifference = touchStartX - touchEndX;
-
-    if (touchDifference > 50) {
-      // Swipe right to left, go to the next slide
-      nextSlide();
-    } else if (touchDifference < -50) {
-      // Swipe left to right, go to the previous slide
-      prevSlide();
-    }
-  };
-
   useEffect(() => {
-    intervalId = setInterval(nextSlide, 2000);
+    intervalId = setInterval(nextSlide, 4000);
     return () => {
       clearInterval(intervalId);
     };
@@ -48,12 +38,7 @@ const JodiSlider = ({ data, showRanks, showIndicators }) => {
   }, [data]);
 
   return (
-    <div
-      className={`jodi-slider`}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* <button onClick={prevSlide}>Prev</button> */}
+    <div className={`jodi-slider`} {...handlers}>
       <div className="slider-content">
         <JodiComponent currentData={data[currentIndex]} />
 
@@ -65,7 +50,6 @@ const JodiSlider = ({ data, showRanks, showIndicators }) => {
           </div>
         )}
       </div>
-      {/* <button onClick={nextSlide}>Next</button> */}
     </div>
   );
 };

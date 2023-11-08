@@ -77,8 +77,8 @@ const UserLeaderBoard = () => {
           boardTabs.overall
             ? userOverll
             : isSliderOn
-            ? userHourlyNow
-            : userHourlyPrev
+            ? userHourlyPrev
+            : userHourlyNow
         }
         isTalent={false}
         showEst={boardTabs.overall}

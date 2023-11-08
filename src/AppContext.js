@@ -8,17 +8,45 @@ const EventProvider = ({ children }) => {
     partnershipBeansPot: null,
     gamePoints: 0,
     festiveToken: 0,
+    houseInfoList: [],
+    startTime: 0,
+    endTime: 0,
   });
   const [user, setUser] = useState({
     userId: 0,
     token: "",
   });
+
+  let day, months, years, hours, mins, secs, dateStr2, prevHr2;
   const date = new Date();
-  const dateStr = date.toISOString().split("T")[0];
 
-  const hour = date.getUTCHours();
-  const prevHour = hour - 1;
+  day = date.getUTCDate();
 
+  months = date.getUTCMonth() + 1;
+  years = date.getUTCFullYear();
+
+  hours = date.getUTCHours();
+  mins = date.getUTCMinutes();
+  secs = date.getUTCSeconds();
+
+  if (hours == 0) {
+    day = day - 1;
+    prevHr2 = 23;
+  } else {
+    prevHr2 = hours - 1;
+  }
+  day = day < 10 ? `0${day}` : day;
+  dateStr2 = years + "-" + months + "-" + day;
+
+  // const dateStr = date.toISOString().split("T")[0];
+  // console.log("date str 2:", dateStr2);
+  // console.log("date str:", dateStr);
+
+  // const hour = date.getUTCHours();
+
+  // console.log("hour:", hour);
+  // console.log("prev hour:", prevHour);
+  // console.log("curr date:", dateStr);
   const [giftingLeaderboardData, setGiftingLeaderboardData] = useState({
     userOverll: [],
     talentOverall: [],
@@ -40,7 +68,7 @@ const EventProvider = ({ children }) => {
 
   const getInfo = () => {
     fetch(
-      `${baseUrl}/api/activity/diwaliMela/getUserEventInfo?userId=${testUserId}`
+      `${baseUrl}/api/activity/diwaliMela/getUserEventInfo?userId=${user.userId}`
     )
       .then((response) =>
         response.json().then((response) => {
@@ -50,6 +78,9 @@ const EventProvider = ({ children }) => {
             partnershipBeansPot: response.data.partnershipBeansPot,
             gamePoints: Math.floor(response.data.gamePoints / 25000),
             festiveToken: response.data.festiveToken,
+            houseInfoList: response.data.houseInfoList,
+            startTime: response.data.currentTimestamp,
+            endTime: response.data.endTimestamp,
           });
         })
       )
@@ -58,20 +89,21 @@ const EventProvider = ({ children }) => {
 
   useEffect(() => {
     getInfo();
+    getGameRewardHistroy();
   }, [user]);
+
   useEffect(() => {
     getTalentOverall();
     getUserOverall();
-    getGameRewardHistroy();
-    getGameRewardLeaderboard();
-    getDecorateGameLeaderboard();
     getUserHourly();
     getUserHourlyPrev();
     getTalentHourly();
     getTalentHourlyPrev();
     getPartnershipData(1);
     getPartnershipData(0);
-  }, [info]);
+    getGameRewardLeaderboard();
+    getDecorateGameLeaderboard();
+  }, []);
 
   useEffect(() => {
     try {
@@ -88,7 +120,7 @@ const EventProvider = ({ children }) => {
 
   const getUserOverall = () => {
     fetch(
-      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=11&pageNum=1&pageSize=20&dayIndex=1`
+      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=11&pageNum=1&pageSize=20`
     )
       .then((response) =>
         response.json().then((response) => {
@@ -104,9 +136,15 @@ const EventProvider = ({ children }) => {
   };
 
   const getUserHourly = () => {
+    // console.log(
+    //   "user hourly:",
+    //   `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=13&pageNum=1&pageSize=20&dayIndex=${
+    //     dateStr + "_" + hour
+    //   }`
+    // );
     fetch(
       `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=13&pageNum=1&pageSize=20&dayIndex=${
-        dateStr + "_" + hour
+        dateStr2 + "_" + hours
       }`
     )
       .then((response) =>
@@ -125,7 +163,7 @@ const EventProvider = ({ children }) => {
   const getUserHourlyPrev = () => {
     fetch(
       `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=13&pageNum=1&pageSize=20&dayIndex=${
-        dateStr + "_" + prevHour
+        dateStr2 + "_" + prevHr2
       }`
     )
       .then((response) =>
@@ -144,7 +182,7 @@ const EventProvider = ({ children }) => {
   const getTalentHourly = () => {
     fetch(
       `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=14&pageNum=1&pageSize=20&dayIndex=${
-        dateStr + "_" + hour
+        dateStr2 + "_" + hours
       }`
     )
       .then((response) =>
@@ -163,7 +201,7 @@ const EventProvider = ({ children }) => {
   const getTalentHourlyPrev = () => {
     fetch(
       `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=14&pageNum=1&pageSize=20&dayIndex=${
-        dateStr + "_" + prevHour
+        dateStr2 + "_" + prevHr2
       }`
     )
       .then((response) =>
@@ -180,7 +218,7 @@ const EventProvider = ({ children }) => {
   };
   const getTalentOverall = () => {
     fetch(
-      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=12&pageNum=1&pageSize=20&dayIndex=1`
+      `${baseUrl}/api/activity/eidF/getLeaderboardInfoV2?eventDesc=20231108_diwali&rankIndex=12&pageNum=1&pageSize=20`
     )
       .then((response) =>
         response.json().then((response) => {
@@ -211,7 +249,7 @@ const EventProvider = ({ children }) => {
 
   const getGameRewardLeaderboard = () => {
     fetch(
-      `${baseUrl}/api/activity/eidF/getWinnerRankInfo?eventDesc=20231108_diwali&rankIndex=2&pageNum=1&pageSize=20`
+      `${baseUrl}/api/activity/eidF/getWinnerRankInfo?eventDesc=20231108_diwali&rankIndex=1&pageNum=1&pageSize=20`
     )
       .then((response) =>
         response.json().then((response) => {
@@ -239,7 +277,7 @@ const EventProvider = ({ children }) => {
 
   const getPartnershipData = (id) => {
     fetch(
-      `${baseUrl}/api/activity/diwaliMela/getPartnerShipRankInfo?isCurrent=${id}&pageNum=1&pageSize=20`
+      `${baseUrl}/api/activity/diwaliMela/getPartnerShipRankInfo?isCurrent=${id}&pageNum=1&pageSize=30`
     )
       .then((response) =>
         response.json().then((response) => {
@@ -275,6 +313,8 @@ const EventProvider = ({ children }) => {
         getGameRewardHistroy,
         partnershipData,
         user,
+        getDecorateGameLeaderboard,
+        getGameRewardLeaderboard,
       }}
     >
       {children}

@@ -24,9 +24,24 @@ import { baseUrl, testToken, testUserId } from "../api";
 import Purchased from "../popups/Purchased";
 import DiwaliDhamakaGame from "../popups/DiwaliDhamakaGame";
 import token from "../assets/images/diwali-dhamka/token-icon.png";
+import leaderBoradTitle from "../assets/images/leaderboard-text.png";
+import CountdownTimer from "../components/Timer";
+import rewardsText from "../assets/images/rewards-text.png";
+import CountDownTimerFromBe from "../components/CountDownTimerFromBe";
+import CountdownTimer3 from "../components/CountDownTimer3";
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import { Carousel } from "react-responsive-carousel";
+
 const DiwaliMela = () => {
-  const { info, getGameRewardHistroy, getInfo, partnershipData, user } =
-    useContext(AppContext);
+  const {
+    info,
+    getGameRewardHistroy,
+    getInfo,
+    partnershipData,
+    user,
+    diwaliGameLeaderboard,
+    getGameRewardLeaderboard,
+  } = useContext(AppContext);
 
   const [rewardsTabs, setRewardsTabs] = useState({
     user: true,
@@ -124,9 +139,6 @@ const DiwaliMela = () => {
     const month = now.getUTCMonth() + 1;
     const day = now.getUTCDate();
     const hours = now.getUTCHours();
-    const minutes = now.getUTCMinutes();
-    const seconds = now.getUTCSeconds();
-    const milliseconds = now.getUTCMilliseconds();
 
     var timertwelevehOur = " 11:59:59";
     var timertwentyFourhOur = " 23:59:59";
@@ -134,7 +146,6 @@ const DiwaliMela = () => {
     var timerData = hours <= 12 ? timertwelevehOur : timertwentyFourhOur;
 
     let endTime = year + "-" + month + "-" + day + timerData;
-    // console.log("end time:", endTime);
     let startTime = moment().utc().format("YYYY-MM-DD HH:mm:ss");
     let t = moment(endTime).diff(startTime) / 1000; //计算本地时间和utc时间差
 
@@ -144,7 +155,14 @@ const DiwaliMela = () => {
       h = Math.floor((t - 24 * 3600 * d) / 3600);
       m = Math.floor((t - 24 * 3600 * d - h * 3600) / 60);
       s = Math.floor(t - 24 * 3600 * d - h * 3600 - m * 60);
-      setDays(d);
+
+      // console.log("days:", d);
+      // console.log("hours:", h);
+
+      // console.log("mins:", m);
+
+      // console.log("s:", s);
+
       setHours(h);
       setMins(m);
       setSecs(s);
@@ -152,30 +170,33 @@ const DiwaliMela = () => {
         clearInterval(timeInterval);
         return;
       }
-      // console.log("d is:", d);
-      // console.log("h is:", h);
-      // console.log("m is:", m);
-      // console.log("s is:", s);
     }, 1000);
   }
-  timeSet();
+
+  // useEffect(() => {
+  //   timeSet();
+  // }, []);
+  // timeSet();
 
   const onUpCheck = (e) => {
     let max;
-    if (/[+-.]/.test(e.key)) {
-      setInputValue("");
-    } else {
-      // let max = userInfo.throwsLeft < 99 ?  userInfo.throwsLeft : 99;
-      if (info.chances <= 99 && info.chances > 0) {
-        max = info.chances;
-      } else if (info.chances > 99) {
-        max = 99;
-      } else if (info.chances === 0) {
-        max = 1;
-      }
-      let number = inputValue > max ? max : inputValue <= 0 ? "" : inputValue;
-      setInputValue(parseInt(number));
+    // if (/[+-.]/.test(e.key)) {
+    //   setInputValue("");
+    // }
+    //  else {
+
+    if (info?.gamePoints <= 99 && info?.gamePoints > 0) {
+      max = info.gamePoints;
+    } else if (info?.gamePoints > 99) {
+      max = 99;
+    } else if (info?.gamePoints === 0) {
+      max = 1;
     }
+    let number = inputValue > max ? max : inputValue <= 0 ? "" : inputValue;
+    // setInputValue(parseInt(number));
+    setInputValue(number);
+
+    // }
   };
   const onChangeHandle = (event) => {
     if (!event.target.value) {
@@ -184,7 +205,8 @@ const DiwaliMela = () => {
       setShakeText(false);
       setIsInputZero(false);
     }
-    setInputValue(parseInt(event.target.value));
+    // setInputValue(parseInt(event.target.value));
+    setInputValue(event.target.value);
   };
 
   const playGame = () => {
@@ -212,7 +234,9 @@ const DiwaliMela = () => {
     }
 
     fetch(
-      `${baseUrl}/api/activity/diwaliMela/playGame?playCount=${inputValue}`,
+      `${baseUrl}/api/activity/diwaliMela/playGame?playCount=${parseInt(
+        inputValue
+      )}`,
       {
         method: "POST",
         headers: {
@@ -232,21 +256,17 @@ const DiwaliMela = () => {
           if (response.errorCode === 0) {
             setIsPlaying(true);
             setGameRewards(response.data.rewardContent.split("+"));
-            // setRewardsContent(response.data.rewardContent);
-
-            // getGameLeaderboardData();
-
-            // getInfo();
+            getInfo();
+            getGameRewardLeaderboard();
+            getGameRewardHistroy();
           }
           setTimeout(() => {
-            setGamePopup(true);
             setIsPlaying(false);
-            getInfo();
+            setGamePopup(true);
+
             setInputValue(1);
             setIsDisabled(false);
-            getGameRewardHistroy();
-            // getGameLeaderboardData();
-          }, 3000);
+          }, 2100);
         })
       )
       .catch((error) => {
@@ -260,13 +280,13 @@ const DiwaliMela = () => {
   return (
     <div className="diwali-mela">
       <div style={{ position: "relative", top: "-31vw" }}>
-        <Marquee>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+        <Marquee play={true}>
+          {diwaliGameLeaderboard?.map((item) => {
             return (
-              <div className="game-marquee">
+              <div className="mela-marquee">
                 <div className="marquee-item">
                   <img
-                    src={unknowUser}
+                    src={item.portrait ? item.portrait : unknowUser}
                     className="marq-user-img"
                     onClick={() => gotoProfile(item?.userId)}
                   />
@@ -279,9 +299,17 @@ const DiwaliMela = () => {
                       <span className="name">{`${item?.nickname?.slice(
                         0,
                         6
-                      )} has successfully purchased sampe item and has won`}</span>
+                      )} has won `}</span>
 
-                      <span className="rew-desc">{`${item?.userScore} Beans `}</span>
+                      <span className="rew-desc">{`${
+                        item?.userScore === 1
+                          ? "750"
+                          : item?.userScore === 2
+                          ? "500"
+                          : item?.userScore === 3
+                          ? "1500"
+                          : "1000"
+                      } Beans `}</span>
                       <img src={bean} className="rew-img" />
 
                       <span>.&nbsp;Congratulations!</span>
@@ -293,27 +321,37 @@ const DiwaliMela = () => {
           })}
         </Marquee>
       </div>
-
-      <div className="game-section">
+      <div id="extraContent"></div>
+      <div
+        className={`game-section ${
+          isPlaying && inputValue === 99
+            ? "max-reward"
+            : isPlaying
+            ? "small-reward"
+            : "forever"
+        }`}
+      >
         <p className="tokens">
-          Festive Tokens={info.festiveToken} <img src={token} />
+          <span>Festive Tokens</span>
+          <div style={{ position: "relative", bottom: "0.5vw" }}>
+            <span>{info.festiveToken}</span>
+            <img src={token} />
+          </div>
         </p>
-        <p className="info-text">
-          25k <img src={bean} /> on event gifts = 1 Chance
-        </p>
+
         <button className="reward-hist-btn" onClick={toggleRewardsHist} />
 
         <div className="play-sec">
-          <p className="my-chances">My Chances:{info.gamePoints}</p>
+          <p className="my-chances">My Sparklers : {info.gamePoints}</p>
           <input
             type="number"
             value={inputValue}
             min={1}
-            max={999}
+            max={99}
             onChange={onChangeHandle}
             onKeyUp={onUpCheck}
-            pattern="[0-9]*"
-            // style={{ border: isInputZero ? "1px solid red" : "" }}
+            // pattern="[0-9]*"
+            step={0.01}
           />
           {shakeText && (
             <span className={`warning-text shaking-text`}>
@@ -323,12 +361,34 @@ const DiwaliMela = () => {
           <button
             className={`launch-btn ${isDisabled && "blackNWhite"}`}
             onClick={playGame}
+            isDisabled={isDisabled}
           ></button>
         </div>
       </div>
       <div className="jodi-album-sec">
         <img className="title" src={albumTitle} />
-        <JodiSlider data={jodiData} showIndicators={true} />
+        {/* <JodiSlider data={partnershipData?.prev} showIndicators={true} /> */}
+        {/* <Carousel
+          centerMode={true}
+          infiniteLoop={true}
+          autoPlay={true}
+          showIndicators={false}
+        >
+          {partnershipData?.prev.map((item) => (
+            <JodiComponent currentData={item} />
+          ))}
+        </Carousel> */}
+        {!partnershipData?.prev?.length ? (
+          <div className="no-data-found">No Data Found</div>
+        ) : (
+          <Carousel>
+            {partnershipData?.prev?.slice(0, 5).map((item) => (
+              <CarouselItem>
+                <JodiComponent currentData={item} />
+              </CarouselItem>
+            ))}
+          </Carousel>
+        )}
       </div>
       <div className="d-flex j-sa" style={{ marginTop: "3vw" }}>
         <TabButton
@@ -357,6 +417,16 @@ const DiwaliMela = () => {
           </div>
         ) : (
           <div className="rew-container">
+            <img src={rewardsText} className="title" />
+            <p
+              style={{
+                fontSize: "3vw",
+                position: "relative",
+                bottom: "2vw",
+              }}
+            >
+              Top 1st - 5th
+            </p>
             <div className="reward-item">
               <div className="image-div">
                 <img src={getRewardsImage("Bunny profile Frame")} />
@@ -374,16 +444,20 @@ const DiwaliMela = () => {
             className="d-flex p-rel al-center"
             style={{ left: "5vw", top: "8vw" }}
           >
-            <TimeUnit unit="Hr" value={hrs} />
+            {/* <TimeUnit unit="Hr" value={hrs} />
             <span className="timer-colon">:</span>
             <TimeUnit unit="Min" value={mins} />
             <span className="timer-colon">:</span>
-            <TimeUnit unit="Sec" value={secs} />
+            <TimeUnit unit="Sec" value={secs} /> */}
+
+            {/* <CountDownTimerFromBe /> */}
+
+            <CountdownTimer3 targetTimestamp={info.endTime} />
           </div>
         </div>
       </div>
 
-      <div className="jodi-leaderboard">
+      <div className="jodi-leaderboard-wrap">
         <div className="d-flex j-center" style={{ marginTop: "4vw" }}>
           <SwitchButton
             bg={switchBg}
@@ -408,26 +482,52 @@ const DiwaliMela = () => {
             />
           </div>
         </div>
-        <div className="contributors-items">
-          {leaderboardTabs.rank1
-            ? currentData
-                .slice(0, 10)
-                ?.map((partners, index) => (
-                  <JodiLeaderboardItem partners={partners} index={index} />
-                ))
-            : leaderboardTabs.rank2
-            ? currentData
-                .slice(10, 21)
-                ?.map((partners, index) => (
-                  <JodiLeaderboardItem partners={partners} index={index} />
-                ))
-            : currentData
-                .slice(21, 31)
-                ?.map((partners, index) => (
-                  <JodiLeaderboardItem partners={partners} index={index} />
-                ))}
+        <div className="jodi-leaderboard">
+          <img src={leaderBoradTitle} className="title" />
+          <div className="contributors-items">
+            {leaderboardTabs.rank1
+              ? currentData
+                  .slice(0, 10)
+                  ?.map((partners, index) => (
+                    <JodiLeaderboardItem
+                      partners={partners}
+                      index={index}
+                      isCurrent={isSliderOn}
+                    />
+                  ))
+              : leaderboardTabs.rank2
+              ? currentData
+                  .slice(10, 20)
+                  ?.map((partners, index) => (
+                    <JodiLeaderboardItem
+                      partners={partners}
+                      index={index}
+                      isCurrent={isSliderOn}
+                    />
+                  ))
+              : currentData
+                  .slice(20, 30)
+                  ?.map((partners, index) => (
+                    <JodiLeaderboardItem
+                      partners={partners}
+                      index={index}
+                      isCurrent={isSliderOn}
+                    />
+                  ))}
+
+            {leaderboardTabs.rank1 && !currentData.length && (
+              <div className="no-data-found">No Data Found</div>
+            )}
+            {leaderboardTabs.rank2 && !currentData.slice(10, 21).length && (
+              <div className="no-data-found">No Data Found</div>
+            )}
+            {leaderboardTabs.rank3 && !currentData.slice(21, 31).length && (
+              <div className="no-data-found">No Data Found</div>
+            )}
+          </div>
         </div>
       </div>
+
       {showRewardsHist && (
         <RewardsHistoryPopup popUpHandler={toggleRewardsHist} />
       )}
@@ -437,6 +537,7 @@ const DiwaliMela = () => {
           errorCode={errorCode}
           gameRewards={gameRewards}
           errMsg={errMsg}
+          inputValue={inputValue}
         />
       )}
     </div>

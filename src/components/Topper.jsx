@@ -3,7 +3,7 @@ import React from "react";
 import rank1 from "../assets/images/top-1-frame.png";
 import rank2 from "../assets/images/top-2-frame.png";
 import rank3 from "../assets/images/top-3-frame.png";
-import levelImg from "../assets/images/level-img.png";
+// import levelImg from "../assets/images/level-img.png";
 import beans from "../assets/images/bean-icon.png";
 import gems from "../assets/images/gems.png";
 

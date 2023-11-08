@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { testLeaderData } from "../testData";
 import Topper from "./Topper";
 import LeaderBoardItem from "./LeaderBoardItem";
+import title from "../assets/images/leaderboard-text.png";
 
 const LeaderboardComponent = ({
   data,
@@ -16,6 +17,7 @@ const LeaderboardComponent = ({
 
   return (
     <div className="leaderboard-comp">
+      <img src={title} className="title" />
       <div className="toppers-section">
         {data[0] && (
           <div className="pos-1">

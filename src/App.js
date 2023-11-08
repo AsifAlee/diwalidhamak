@@ -1,11 +1,13 @@
 import "./App.scss";
 import Header from "./components/Header";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TabButton from "./components/TabButtons";
 import DiwaliMela from "./pages/DiwaliMela";
 import DecorateHouse from "./pages/DecorateHouse";
 import EventGifting from "./pages/EventGifting";
 import Guide from "./popups/Guide";
+import { AppContext } from "./AppContext";
+import ScrollToTopButton from "./components/ScrollToTop";
 
 function App() {
   const [mainTabs, setMainTabs] = useState({
@@ -13,12 +15,19 @@ function App() {
     decorateHouse: false,
     gifting: false,
   });
+  const { user } = useContext(AppContext);
 
   const [showGuide, setShowGuide] = useState(false);
 
   const toggleGuide = () => {
     setShowGuide((prevState) => !prevState);
   };
+
+  // useEffect(() => {
+  //   if (user) {
+  //     alert(user.token);
+  //   }
+  // }, [user]);
 
   const toggleMainTabs = (name) => {
     if (name === "diwalimela") {
@@ -70,6 +79,7 @@ function App() {
           showArrowImg={false}
         />
       </div>
+
       {mainTabs.diwaliMela ? (
         <DiwaliMela />
       ) : mainTabs.decorateHouse ? (
@@ -78,8 +88,9 @@ function App() {
         <EventGifting />
       )}
       <p className="rights">All rights reserved by streamkar</p>
-      <div className="footer"></div>
-
+      <div className="footer">
+        <ScrollToTopButton />
+      </div>
       {showGuide && <Guide popUpHandeler={toggleGuide} />}
     </div>
   );

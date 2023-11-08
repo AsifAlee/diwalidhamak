@@ -37,8 +37,13 @@
         .name {
           font-size: 3vw;
           position: absolute;
-          left: 8vw;
+          /* left: 4vw; */
           top: 4vw;
+          // border: 1px solid;
+          width: 100%;
+          text-align: center;
+          color: #3e1608;
+          font-weight: bold;
         }
         img {
           width: 15vw;
@@ -76,19 +81,21 @@
 
   .beans-pot {
     // width: 80%;
-    height: 42vw;
+    height: 34vw;
     background-image: url("../assets//images/beans-pot-with-bg.png");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
     position: relative;
 
     .text {
       position: absolute;
       font-size: 3vw;
-      top: 12vw;
-      width: 43vw;
+      top: 7vw;
+      width: 52vw;
       left: 37vw;
       color: white;
+      // border: 1px solid;
+
     }
     .pot-value {
       height: 6vw;
@@ -98,16 +105,18 @@
       justify-content: center;
       align-items: center;
       position: absolute;
-      bottom: 8vw;
+      bottom: 4vw;
       left: 42vw;
       color: white;
-      padding: 2vw;
-      background-image: url('../assets/images/beans-amoun-bg.png');
+      padding: 1vw;
+      background-image: url("../assets/images/beans-amoun-bg.png");
       background-size: 100% 100%;
       background-repeat: no-repeat;
+      min-width: 26vw;
       span {
         font-size: 3vw;
         color: yellow;
+        font-weight: bolder;
       }
       img {
         width: 4vw;
@@ -131,25 +140,33 @@
       background-image: url("../assets/images/leaderboard-bg.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+      position: relative;
 
+      .title {
+        position: absolute;
+        top: 4vw;
+        width: 95vw;
+      }
       .toppers-section {
         height: 50vw;
         // border: 1px solid red;
-        position: relative;
-        display: flex;
-        position: relative;
 
-        .pos-1{
+        // display: flex;
+        position: relative;
+        top: 12vw;
+        // left: 2vw;
+
+        .pos-1 {
           position: absolute;
           left: 32vw;
         }
-        
-        .pos-2{
+
+        .pos-2 {
           position: absolute;
-         top: 13vw;
+          top: 13vw;
         }
-        
-        .pos-3{
+
+        .pos-3 {
           position: absolute;
           right: 5vw;
           top: 13vw;
@@ -157,12 +174,14 @@
       }
       .restWinners-section {
         padding: 2vw;
-      height: 115vw;
-      // border: 2px solid yellow;
-      overflow-y: auto;
-      width: 95%;
-      margin: 0 auto;
-  
+        height: 104vw;
+        // border: 2px solid yellow;
+        overflow-y: auto;
+        width: 95%;
+        margin: 0 auto;
+        position: absolute;
+        top: 66vw;
+        left: 2vw;
       }
       .restWinners-section::-webkit-scrollbar {
         width: 1vw;
@@ -185,44 +204,48 @@
       .restWinners-section::-webkit-scrollbar-thumb:hover {
         background: #b30000;
       }
-      .see-more{
+      .see-more {
         width: 19vw;
         height: 7vw;
-        background-image: url('../assets/images/see-more.png');
+        background-image: url("../assets/images/see-more.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         border: none;
         background-color: transparent;
         display: block;
         margin: 0 auto;
+        position: absolute;
+        bottom: 1vw;
+        left: 40vw;
       }
 
-      .see-less{
+      .see-less {
         width: 19vw;
         height: 7vw;
-        background-image: url('../assets/images/see-less.png');
+        background-image: url("../assets/images/see-less.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         border: none;
         background-color: transparent;
         display: block;
         margin: 0 auto;
+        position: absolute;
+        bottom: -3vw;
+        left: 40vw;
       }
 
-      .noData{
-        
-    position: relative;
-    color: white;
-    width: 80%;
-    // border: 1px solid;
-    bottom: 54vw;
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    font-size: 4vw;
-
+      .noData {
+        position: absolute;
+        color: white;
+        width: 80%;
+        // border: 1px solid;
+        bottom: 70vw;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 4vw;
+        left: 11vw;
       }
     }
-
   }
 }

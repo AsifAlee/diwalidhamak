@@ -14,77 +14,107 @@ import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { getRewardsImage, gotoProfile } from "../functions";
 import bean from "../assets/images/bean-icon.png";
-import { errorCodes } from "../api";
+import { baseUrl, errorCodes, testToken, testUserId } from "../api";
+import HouseItemsTable from "../popups/HouseItemsTable";
+import emptyLantern from "../assets/images/decorate-house/Lartern.png";
 
 const DecorateHouse = () => {
-  const { decorGameLeaderboard } = useContext(AppContext);
+  const {
+    decorGameLeaderboard,
+    getInfo,
+    info,
+    user,
+    getDecorateGameLeaderboard,
+  } = useContext(AppContext);
   const [showRewardsHist, setShowRewardsHist] = useState(false);
   const [showSurePopUp, setShowSurePopup] = useState(false);
   const [purchasePopup, setPurchasePopup] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [id, setId] = useState(0);
+
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [rewardsContent, setRewardsContent] = useState("");
+  const [purchaseAll, setPurchaseAll] = useState(false);
+  const [allUnlocked, setAllUnlocked] = useState(false);
+  const [seeMore, setSeeMore] = useState(true);
+  const toggleSeeMore = () => {
+    setSeeMore((prevState) => !prevState);
+  };
   const toggleRewardsHist = () => {
     setShowRewardsHist((prevState) => !prevState);
   };
   const toggleRSurePopuo = () => {
     setShowSurePopup((prevState) => !prevState);
+    setPurchaseAll(false);
   };
   const setItemId = (id) => {
     setId(id);
   };
-  const togglePurchasePopup = () => {
+  const togglePurchasePopup = (removeUnlock) => {
+    if (removeUnlock) {
+      setAllUnlocked(false);
+    }
     setShowSurePopup(false);
+    setPurchaseAll(false);
     setPurchasePopup((prevState) => !prevState);
   };
 
   const [errorCode, setErrorCode] = useState(null);
 
-  // const purchaseItem = (id) => {
-  //   fetch(`${baseUrl}/api/activity/diwaliMela/decorateHouse?index=${id}`, {
-  //     method: "POST",
-  //     headers: {
-  //       checkTag: "",
-  //       // userId: user.userId,
-  //       // token: user.token,
-  //       userId: testUserId,
-  //       token: testToken,
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) =>
-  //       response.json().then((response) => {
-  //         setErrorCode(response.errorCode);
-  //         setErrMsg(response?.msg);
-  //         if (response.errorCode === 0) {
-  //           // setIsPlaying(true);
-  //           // setRewardsContent(response.data.rewardContent);
-  //           // getGameLeaderboardData();
-  //           // getInfo();
-  //         }
-  //         setTimeout(() => {
-  //           // setIsPlaying(false);
-  //           // getInfo();
-  //           // setIsDisabled(false);
-  //         }, 3000);
-  //       })
-  //     )
-  //     .catch((error) => {
-  //       console.error(error);
-  //       setInputValue(1);
-  //       setIsDisabled(false);
-  //       setIsPlaying(false);
-  //     });
-  // };
+  const purchaseItem = (id) => {
+    if (isDisabled) {
+      return;
+    }
+    setIsDisabled(true);
+    let url;
+    if (purchaseAll) {
+      url = `${baseUrl}/api/activity/diwaliMela/decorateHouse`;
+    } else {
+      url = `${baseUrl}/api/activity/diwaliMela/decorateHouse?index=${id}`;
+    }
+    console.log("the url is:", url);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        checkTag: "",
+        userId: user.userId,
+        token: user.token,
+        // userId: testUserId,
+        // token: testToken,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) =>
+        response.json().then((response) => {
+          setErrorCode(response.errorCode);
+          setErrMsg(response?.msg);
+          if (response.errorCode === 0) {
+            setRewardsContent(response.data.rewardContent);
+            setAllUnlocked(response.data.unlockAllMaterial);
+            getDecorateGameLeaderboard();
+            getInfo();
+          }
+
+          setIsDisabled(false);
+          togglePurchasePopup();
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+        togglePurchasePopup();
+        setIsDisabled(false);
+      });
+  };
   return (
     <div className="decorate-house">
       <div style={{ position: "relative", top: "-31vw" }}>
-        <Marquee>
+        <Marquee play={true}>
           {decorGameLeaderboard?.map((item) => {
             return (
               <div className="game-marquee">
                 <div className="marquee-item">
                   <img
-                    src={unknowUser}
+                    src={item?.portrait ? item?.portrait : unknowUser}
                     className="marq-user-img"
                     onClick={() => gotoProfile(item?.userId)}
                   />
@@ -97,12 +127,21 @@ const DecorateHouse = () => {
                       <span className="name">{`${item?.nickname?.slice(
                         0,
                         6
-                      )} has successfully purchased sampe item and has won`}</span>
-
+                      )} has successfully purchased ${
+                        item?.userScore === 1300
+                          ? "Lantern"
+                          : item?.userScore === 3000
+                          ? "Lights"
+                          : item?.userScore === 4400
+                          ? "Sofa"
+                          : item?.userScore === 7100
+                          ? "Study Area"
+                          : item?.userScore === 9200
+                          ? "Bedroom Decoration"
+                          : "all items"
+                      } and has won `}</span>
                       <span className="rew-desc">{`${item?.userScore} Beans `}</span>
-                      <img src={bean} className="rew-img" />
-
-                      <span>.&nbsp;Congratulations!</span>
+                      <img src={bean} className="rew-img" />.
                     </p>
                   </div>
                 </div>
@@ -111,24 +150,36 @@ const DecorateHouse = () => {
           })}
         </Marquee>
       </div>
+
       <div className="decorate-house-game">
         <div className="house-items">
-          {houseItems.map((item) => (
+          {houseItems.map((item, index) => (
             <HouseItem
               item={item}
               toggleRSurePopuo={toggleRSurePopuo}
               setItemId={setItemId}
+              key={index}
+              index={index + 1}
             />
           ))}
+          <img src={emptyLantern} className="empty-lantern" />
         </div>
         <button className="reward-hist-btn" onClick={toggleRewardsHist} />
 
         <div className="play-sec">
-          <p>Festive Tokens:XXX</p>
-          <p>Play</p>
-          <button className="purchase-btn" onClick={toggleRSurePopuo} />
+          <div className="festive-tokens">
+            <span>Festive Tokens:{info.festiveToken}</span>
+          </div>
+          <button
+            className="purchase-all-btn"
+            onClick={() => {
+              toggleRSurePopuo();
+              setPurchaseAll(true);
+            }}
+          />
         </div>
       </div>
+
       <div className="house-info">
         <img src={title} className="title" />
         <div className="info-content">
@@ -149,8 +200,7 @@ const DecorateHouse = () => {
           <div className="list-item">
             <div className="bullet"></div>
             <span>
-              After all the items are purchase,the game will reset,the game will
-              reset.
+              After all the items are purchased, the game will be reset.
             </span>
           </div>
         </div>
@@ -159,26 +209,41 @@ const DecorateHouse = () => {
       <div className="rewards-leaderboard">
         <img src={leaderboardTag} className="tag" />
         <div className="winners">
-          {decorGameLeaderboard.map((item, index) => (
-            <GameLeaderboartItem item={item} index={index} />
-          ))}
+          {decorGameLeaderboard
+            ?.slice(0, seeMore ? 10 : 20)
+            ?.map((item, index) => (
+              <GameLeaderboartItem item={item} index={index} />
+            ))}
         </div>
+
+        {decorGameLeaderboard?.length > 10 && (
+          <button
+            className={seeMore ? "see-more" : "see-less"}
+            onClick={toggleSeeMore}
+          />
+        )}
       </div>
-      {showRewardsHist && (
-        <RewardsHistoryPopup popUpHandler={toggleRewardsHist} />
-      )}
+      {showRewardsHist && <HouseItemsTable popUpHandler={toggleRewardsHist} />}
       {showSurePopUp && (
         <AreUSure
           popUpHandeler={toggleRSurePopuo}
           togglePurchasePopup={togglePurchasePopup}
-          tokens={houseItems.find((item) => item.id === id).tokens}
+          tokens={houseItems.find((item) => item.id === id)?.tokens || 0}
+          purchaseItem={purchaseItem}
+          purchaseAll={purchaseAll}
+          id={id}
+          isDisabled={isDisabled}
+          info={info}
         />
       )}
       {purchasePopup && (
         <Purchased
           popUpHandeler={togglePurchasePopup}
-          errorCode={errorCodes.succes}
+          errorCode={errorCode}
           errMsg={errMsg}
+          name={houseItems.find((item) => item.id === id)?.name || ""}
+          rewardsContent={rewardsContent}
+          allUnlocked={allUnlocked}
         />
       )}
     </div>

@@ -10,29 +10,32 @@ const DiwaliDhamakaGame = ({
   errorCode,
   gameRewards,
   errMsg,
+  inputValue,
 }) => {
   return (
     <PopUp bg={bg} game={true}>
-      <div className="purchased">
+      <div className="dhamaka-game">
         <img src={errorCode === 0 ? hurrah : tryAgain} className="title" />
         <button className="closeBtn" onClick={popUpHandeler} />
-        {errorCode === 10000004 ? (
-          <div className="purchased-content">
+        {inputValue.toString().includes(".") ? (
+          <div className="dhamaka-content">Please enter integer value</div>
+        ) : errorCode === 10000004 ? (
+          <div className="dhamaka-content">
             To have an opportunity to take a shot, please send event gifts
             valued at 25k beans. Once you have done so, you can start playing.
             Join us soon!
           </div>
         ) : errorCode === 0 ? (
-          <div className="purchased-content">
+          <div className="dhamaka-content">
             <div className="p1">
               <p>
                 That was a perfect shot. For this wonderful performance we would
                 like to reward you with
               </p>
-              <div>
+              <div className="rewards-area">
                 {gameRewards.length &&
                   gameRewards.map((reward) => (
-                    <div>
+                    <div className="rew-item">
                       <img src={getRewardsImage(reward)} />
                       <p>{reward}</p>
                     </div>
@@ -46,7 +49,7 @@ const DiwaliDhamakaGame = ({
             </p>
           </div>
         ) : (
-          <div className="purchased-content">{errMsg}</div>
+          <div className="dhamaka-content">{errMsg}</div>
         )}
       </div>
     </PopUp>

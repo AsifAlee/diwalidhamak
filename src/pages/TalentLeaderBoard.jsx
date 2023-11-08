@@ -69,8 +69,8 @@ const TalentLeaderBoard = () => {
           boardTabs.overall
             ? talentOverall
             : isSliderOn
-            ? talentHourlyNow
-            : talentHourlyPrev
+            ? talentHourlyPrev
+            : talentHourlyNow
         }
         isTalent={true}
       />

@@ -5,7 +5,7 @@ const LanguageDropdown = (props) => {
   const { selectedLanguage, changeLanguage } = props;
 
   const [isOpen, setIsOpen] = useState(false);
-  const languageOptions = ["Urdu", "English"];
+  const languageOptions = ["Hindi/Hinglish", "English"];
 
   const handleLanguageChange = (index) => {
     changeLanguage(index);

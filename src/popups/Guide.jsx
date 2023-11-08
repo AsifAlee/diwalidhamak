@@ -3,6 +3,8 @@ import PopUp from "../components/Popup";
 import bg from "../assets/images/guide-bg.png";
 import title from "../assets/images/guide-text.png";
 import { AppContext } from "../AppContext";
+import bean from "../assets/images/bean-icon.png";
+import fToken from "../assets/images/decorate-house/bullet-point.png";
 
 const Guide = ({ popUpHandeler }) => {
   const { selectedLng } = useContext(AppContext);
@@ -18,17 +20,18 @@ const Guide = ({ popUpHandeler }) => {
             <ul className="list-item">
               <li>
                 To participate in the game, you need to spend 25,000 beans on
-                event gifts, which will give you one chance to play. (25,000=1
-                chance )
+                event gifts, which will give you one chance to play. (25,000{" "}
+                <img src={bean} className="bean-img" />
+                =1 chance )
               </li>
               <li>
                 You can type up to x99 chances to play in one go based on the
                 beans spent on the event gifts.
               </li>
               <li>
-                Once you click on <span className="highlight">LAUNCH</span> ,
-                the rocket will light up and burst the balloon, revealing the
-                rewards you have won
+                Once you click on <span className="highlight">LAUNCH</span>{" "}
+                button , the rocket will light up and burst the balloon,
+                revealing the rewards you have won.
               </li>
               <li>
                 You will receive Festive Tokens as a reward, which can be used
@@ -67,32 +70,61 @@ const Guide = ({ popUpHandeler }) => {
               <tr>
                 <td>1</td>
                 <td>Lantern</td>
-                <td>3,000</td>
-                <td>1,300</td>
+                <td>
+                  3,000 <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  1,300
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Lights</td>
-                <td>7,000</td>
-                <td>3,000</td>
+                <td>
+                  7,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  3,000
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>Speakers</td>
-                <td>10,000</td>
-                <td>4,400</td>
+                <td>Sofa</td>
+                <td>
+                  10,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  4,400
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>4</td>
-                <td>TV</td>
-                <td>16,000</td>
-                <td>7,100</td>
+                <td>Study Area</td>
+                <td>
+                  16,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  7,100
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>5</td>
-                <td>Furniture</td>
-                <td>20,000</td>
-                <td>9,200</td>
+                <td>Bedroom Decoration</td>
+                <td>
+                  20,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  9,200
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td></td>
@@ -144,9 +176,10 @@ const Guide = ({ popUpHandeler }) => {
             <h2 className="heading highlight">Diwali Dhamaka</h2>
             <ul className="list-item">
               <li>
-                Khela shuru karne ke liye,aapko 25,000 beans event gifts pe
+                Khel shuru karne ke liye, aapko 25,000 beans event gifts pe
                 kharch karne honge,isse aapko khelnka ek mauka diya jayega
-                (25,000=1 chance).
+                (25,000 <img src={bean} className="bean-img" />
+                =1 chance).
               </li>
               <li>
                 Aapko agar multiple chances khelne hai toh aap manually bhi type
@@ -196,32 +229,61 @@ const Guide = ({ popUpHandeler }) => {
               <tr>
                 <td>1</td>
                 <td>Lantern</td>
-                <td>3,000</td>
-                <td>1,300</td>
+                <td>
+                  3,000 <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  1,300
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Lights</td>
-                <td>7,000</td>
-                <td>3,000</td>
+                <td>
+                  7,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  3,000
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>Speakers</td>
-                <td>10,000</td>
-                <td>4,400</td>
+                <td>Sofa</td>
+                <td>
+                  10,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  4,400
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>4</td>
-                <td>TV</td>
-                <td>16,000</td>
-                <td>7,100</td>
+                <td>Study Area</td>
+                <td>
+                  16,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  7,100
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td>5</td>
-                <td>Furniture</td>
-                <td>20,000</td>
-                <td>9,200</td>
+                <td>Bedroom Decoration</td>
+                <td>
+                  20,000
+                  <img className="fToken" src={fToken} />
+                </td>
+                <td>
+                  9,200
+                  <img className="bean-img" src={bean} />
+                </td>
               </tr>
               <tr>
                 <td></td>
@@ -240,9 +302,9 @@ const Guide = ({ popUpHandeler }) => {
             </h2>
             <ul className="list-item">
               <li>
-                “Best Partnership Album” ke window par jhalak ke liye,12 ghante
-                ki cycle mai user ko jyada se jyada beans ek talent par kharch
-                karne honge.
+                “Best Partnership Album” ke window par jhalakne ke liye,12
+                ghante ki cycle mai user ko jyada se jyada beans ek talent par
+                kharch karne honge.
               </li>
               <li>
                 Jiski Best Partnership hogi unhe album par show kar diya jayega

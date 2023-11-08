@@ -41,8 +41,9 @@
       background-color: transparent;
       border: none;
       position: absolute;
-      bottom: -13vw;
+      // bottom: -13vw;
       left: 36vw;
+      top: 100vw;
     }
     .title {
       position: absolute;
@@ -56,10 +57,16 @@
       height: 87vw;
       position: relative;
       left: 3vw;
-    
+
       position: absolute;
       top: 8vw;
       color: white;
+
+      .bean-img{
+        width: 3.5vw;
+        position: relative;
+        top: 1vw;
+      }
 
       .house-table {
         border: 1px dotted yellow;
@@ -76,6 +83,24 @@
           padding: 2vw;
           border: 1px dotted yellow;
           border-radius: 2vw;
+          text-align: center;
+        }
+
+        .bean-img{
+          width: 3vw;
+          position: relative;
+          top: 0.7vw;
+     
+          left: 0.4vw;
+        }
+
+        .fToken{
+          position: relative;
+          left: 1vw;
+          // bottom: 1vw;
+          width: 2vw;
+          top: 0.3vw;
+    
         }
       }
       .heading {
@@ -116,9 +141,37 @@
     height: 100%;
     position: relative;
 
+    .title-div {
+      width: 77vw;
+      height: 8vw;
+      // background-color: #ce9735;
+
+      border-radius: 5vw;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 3vw;
+      color: white;
+      background-image: url("../assets/images/popups/rewards-hist-title.png");
+      background-size: 100% 100%;
+      background-position: center;
+      position: absolute;
+      top: 5vw;
+      left: 2vw;
+  
+
+      .time-img{
+        width: 15vw;
+      }
+      
+      .rewa-img{
+        width: 18vw;
+      }
+    }
+
     .history-content {
       width: 81vw;
-      height: 68vw;
+      height: 74vw;
       position: relative;
       top: 14vw;
       left: 2vw;
@@ -128,50 +181,37 @@
       overflow-y: auto;
       // border: 1px solid yellow;
 
-      .title-div {
-        width: 77vw;
-        height: 8vw;
-        // background-color: #ce9735;
 
-        border-radius: 5vw;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        font-size: 3vw;
-        color: white;
-        background-image: url("../assets/images/popups/rewards-hist-title.png");
-        background-size: 100% 100%;
-        background-position: center;
-        position: relative;
-        // left: 2vw;
-      }
       .no-rec-found {
         position: relative;
         top: 24vw;
         font-size: 5vw;
         font-family: "ROG";
         color: white;
- 
+
         text-align: center;
-    
       }
     }
     .history-content::-webkit-scrollbar {
       width: 1vw;
-      background-color: transparent;
+      background-color: gray;
     }
 
     /* Track */
-    // .history-content::-webkit-scrollbar-track {
-    //   box-shadow: inset 0 0 5px grey;
-    //   border-radius: 1vw;
-    //   background-color: white;
-    // }
+    .history-content::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 1vw;
+    }
 
     /* Handle */
     .history-content::-webkit-scrollbar-thumb {
-      background: linear-gradient(red,green,blue);
+      background: white;
       border-radius: 2vw;
+    }
+
+    /* Handle on hover */
+    .history-content::-webkit-scrollbar-thumb:hover {
+      background: #b30000;
     }
 
     .closeBtn {
@@ -185,16 +225,45 @@
       background-color: transparent;
       border: none;
       position: absolute;
-      bottom: -15vw;
+      // bottom: -15vw;
       left: 36vw;
+      top: 101vw;
     }
     .title {
- 
       position: absolute;
       top: -3vw;
       left: 3vw;
       width: 78vw;
-      
+    }
+
+    .load-more {
+      width: 19vw;
+      height: 7vw;
+      background-image: url("../assets/images/popups/load-more-btn.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border: none;
+      background-color: transparent;
+      display: block;
+      margin: 0 auto;
+      position: absolute;
+      bottom: 4vw;
+      left: 33vw;
+    }
+
+    .load-less {
+      width: 19vw;
+      height: 7vw;
+      background-image: url("../assets/images/popups/load-less-btn.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border: none;
+      background-color: transparent;
+      display: block;
+      margin: 0 auto;
+      position: absolute;
+      bottom: 4vw;
+      left: 33vw;
     }
   }
 
@@ -270,13 +339,13 @@
 
   .areUSure {
     width: 100%;
-    height:100%;
+    height: 100%;
     position: relative;
 
-    .title{
+    .title {
       width: 32vw;
       position: absolute;
-      left: 23vw;
+      left: 25vw;
       top: 2vw;
     }
 
@@ -292,7 +361,6 @@
       position: absolute;
       top: 46vw;
       left: 34vw;
-  
     }
     .text {
       position: absolute;
@@ -303,7 +371,7 @@
       width: 63%;
     }
 
-    .sure-content{
+    .sure-content {
       display: flex;
       position: absolute;
       top: 13vw;
@@ -313,30 +381,77 @@
 
       width: 90%;
       font-weight: bold;
-
-
     }
-    .purchase-btn{
+    .purchase-btn {
       width: 25vw;
       height: 9vw;
       background-image: url("../assets/images/popups/purchase-btn.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
       position: absolute;
-    bottom: 10vw;
-    left: 27vw;
-  
+      // bottom: 6vw;
+      left: 27vw;
+      top: 30vw;
     }
-
- 
   }
 
-  .purchased{
+  .purchased {
     width: 100%;
     height: 100%;
     position: relative;
 
-    .title{
+    .title {
+      width: 42vw;
+      position: absolute;
+      left: 19vw;
+      top: 2vw;
+    }
+
+    .closeBtn {
+      background-image: url("../assets/images/popups/close-btn.png");
+
+      width: 12vw;
+      height: 12vw;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      // top: 46vw;
+      left: 34vw;
+      // bottom: -13vw;
+      top: 91vw;
+    }
+
+    .purchased-content {
+      position: absolute;
+      width: 82%;
+      // border: 2px solid;
+      top: 33vw;
+      left: 9vw;
+      font-size: 2.8vw;
+      color: white;
+      text-align: center;
+
+      .p1 {
+        img{
+          width: 4vw;
+          position: relative;
+          top: 1vw;
+        }
+      }
+      .p2 {
+        margin-top: 2vw;
+      }
+    }
+  }
+
+  .house-item-table {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .title {
       width: 42vw;
       position: absolute;
       left: 19vw;
@@ -356,35 +471,152 @@
       // top: 46vw;
       left: 34vw;
       bottom: -13vw;
-  
     }
 
-    .purchased-content{
+    .table-content {
+      width: 93%;
+      height: 53vw;
+      position: relative;
+      left: 3vw;
+
       position: absolute;
-    width: 82%;
-    // border: 2px solid;
-    top: 33vw;
-    left: 9vw;
-    font-size: 2.8vw;
-    color: white;
-    text-align: center;
+      top: 8vw;
+      color: white;
+      .house-item-table {
+        border: 1px solid;
+        border-radius: 2vw;
+        border-collapse: collapse;
+        border-radius: 2vw;
+        color: white;
+        font-size: 3vw;
+        width: 95%;
+        margin-top: 20vw;
+        font-size: 2vw;
 
-    .p1{
+        tr td {
+          padding: 2vw;
+          border: 1px solid;
+          // border-radius: 2vw;
+          text-align: center;
+        }
 
-    }
-    .p2{
-      margin-top: 2vw;
-    }
-    }
+        .bean-img{
+          width: 3vw;
+          position: relative;
+          top: 1vw;
+        }
+
+        .fToken{
+          position: relative;
+          left: 1vw;
+          // bottom: 1vw;
+          width: 2vw;
     
+        }
+      }
+    }
+  }
+
+  .dhamaka-game {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .title {
+      width: 42vw;
+      position: absolute;
+      left: 19vw;
+      top: 2vw;
+    }
+
+    .closeBtn {
+      background-image: url("../assets/images/popups/close-btn.png");
+
+      width: 12vw;
+      height: 12vw;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      // top: 46vw;
+      left: 34vw;
+      // bottom: -13vw;
+      top: 90vw;
+    }
+
+    .dhamaka-content {
+      position: absolute;
+      width: 82%;
+      // border: 2px solid;
+      top: 30vw;
+      left: 9vw;
+      font-size: 2.8vw;
+      color: white;
+      text-align: center;
+
+      .p1 {
+        .rewards-area {
+          // border: 1px solid;
+          height: 36vw;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow-y: auto;
+          flex-wrap: wrap;
+
+          .rew-item {
+            width: 20vw;
+            height: 25vw;
+            // border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            img {
+              width: 10vw;
+            }
+            p {
+              font-size: 2.5vw;
+              height: 20%;
+            }
+          }
+        }
+
+        .rewards-area::-webkit-scrollbar {
+          width: 1vw;
+          background-color: gray;
+        }
+
+        /* Track */
+        .rewards-area::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px grey;
+          border-radius: 1vw;
+        }
+
+        /* Handle */
+        .rewards-area::-webkit-scrollbar-thumb {
+          background: white;
+          border-radius: 2vw;
+        }
+
+        /* Handle on hover */
+        .rewards-area::-webkit-scrollbar-thumb:hover {
+          background: #b30000;
+        }
+      }
+      .p2 {
+        margin-top: 2vw;
+      }
+    }
   }
 }
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }

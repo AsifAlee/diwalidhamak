@@ -63,8 +63,8 @@ const EventGifting = () => {
           Overall Leaderboard.
         </p>
         <div className="pot-value">
-          <span>{info.overallBeansPot}</span>
           <img src={bean} />
+          <span>{info.overallBeansPot}</span>
         </div>
       </div>
       <div className="rewards">

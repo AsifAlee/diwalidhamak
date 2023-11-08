@@ -1,6 +1,6 @@
 .topper {
     width: 30vw;
-    height: 40vw;
+    // height: 40vw;
 
   
     .topper-images {
@@ -45,7 +45,7 @@
       left: 2vw;
     
       position: relative;
-      top: 19vw;
+      top: 22vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -63,15 +63,15 @@
         width: 19vw;
         text-align: center;
         color: yellow;
-        position: relative;
-        top: 3vw;
+        // position: relative;
+        // top: 3vw;
       }
       .levelImg {
         width: 10vw;
         display: block;
         margin: 0 auto;
-        position: relative;
-      top: 2vw;
+        // position: relative;
+      // top: 2vw;
       }
       .estimatedBeans {
         background-color: #213270;
@@ -84,8 +84,8 @@
         font-size: 1.5vw;
         // height: 5vw;
         flex-direction: column;
-        position: relative;
-        top: 1vw;
+        // position: relative;
+        // top: 1vw;
         padding-top: 0.5vw;
         img {
           width: 2.5vw;
@@ -104,8 +104,8 @@
         background-size: 100% 100%;
         background-repeat: no-repeat; 
         padding: 0.5vw;
-        position: relative;
-        top: 1vw;
+        // position: relative;
+        // top: 1vw;
         img {
           width: 3vw;
         }

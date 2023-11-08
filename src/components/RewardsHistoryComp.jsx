@@ -24,7 +24,7 @@ const RewardsHistoryComponent = ({ item }) => {
         {/* <span>"23/10/2023"</span>
         <span>09:15:37</span> */}
       </div>
-      <div className="">
+      <div style={{ marginBottom: "4vw" }}>
         <LeaderBoardSlider rewards={sliderData} isHistory={true} />
       </div>
     </div>

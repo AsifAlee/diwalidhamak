@@ -1,21 +1,32 @@
 .jodi-leaderboard-item {
   width: 97%;
-  height: 33vw;
+  height: 30vw;
   background-image: url("../assets/images/diwali-dhamka/1st-7th-leaderboard-strip.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
+  left: 1vw;
+  padding: 2vw;
 
   .left-div {
-    flex-grow: 1;
+    // flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // border: 1px solid;
+    width: 20%;
+    // height: 80%;
+    justify-content: center;
+
     .name {
       font-size: 3vw;
       color: white;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     .level {
       width: 8vw;
@@ -30,6 +41,7 @@
       justify-content: center;
       border-radius: 1.5vw;
       font-size: 2vw;
+      margin-top: 1vw;
       img {
         width: 3vw;
         position: relative;
@@ -38,35 +50,46 @@
     }
   }
   .center-div {
-    flex-grow: 2;
-    position: relative;
-    left: -3vw;
-    top: -10vw;
+    // flex-grow: 3;
+    // position: relative;
+    // left: -3vw;
+    // top: -10vw;
+    // border: 1px solid;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vw;
 
     .images-with-frames {
       position: relative;
       .two-frame {
-        position: absolute;
+        // position: absolute;
         width: 35vw;
         z-index: 1;
+        pointer-events: none;
       }
       .user-img {
         position: absolute;
         width: 9vw;
         left: 8vw;
         top: 2vw;
+        border-radius: 100%;
       }
       .talent-img {
         position: absolute;
         width: 9vw;
         left: 18vw;
         top: 2vw;
+        border-radius: 100%;
       }
     }
     .beans-cont-text{
-        position: absolute;
-        bottom: -15vw;
-        left: 7vw;
+        // position: absolute;
+        // bottom: -15vw;
+        // left: 7vw;
         width: 23vw;
     }
     .beans-cont-value{
@@ -74,9 +97,9 @@
         height: 6vw;
         background-color: #280348;
         border-radius: 1vw;
-        position: absolute;
-        top: 17vw;
-        left: 3vw;
+        // position: absolute;
+        // top: 17vw;
+        // left: 3vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -85,6 +108,7 @@
         img{
             width: 4vw;
             margin-top: 1vw;
+
         }
         span{
             font-size: 3vw;
@@ -93,17 +117,21 @@
 
   }
   .right-div {
-    flex-grow: 1;
+    // border: 1px solid;
+
+    // flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 20%;
+    // height: 80%;
     .name {
       font-size: 3vw;
       color: white;
     }
     .level {
-      width: 8vw;
+      width: 5vw;
     }
     .beans-div {
       color: white;
